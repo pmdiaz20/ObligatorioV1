@@ -34,6 +34,16 @@ public class TestNopcommerce {
    // private AppointmentPage appointmentPage;
     //FinalPage finalpage;
 
+    String firstname="Pedro";
+    String lastname= "Fernandez";
+    String email= "pedrofernandez2133@gmail.com";
+    String company= "PedFe S.A";
+    String password= "pedro1234";
+    String gender ="m";
+    String confirmpassword= password;
+    String dayBirth ="20";
+    String monthBirth ="October";
+    String yearBirth ="1982";
 
     @BeforeMethod
     public void setupTest(){
