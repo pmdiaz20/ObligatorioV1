@@ -4,7 +4,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pageObjects.HomePage;
+import pageObjects.RegisterPage;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -21,6 +26,42 @@ public class TestNopcommerce {
     4. Verificar que el registro fue satisfactorio
      */
 
+    private WebDriver driver;
+    private HomePage homePage;
+    private RegisterPage registerPage;
+    //private WebDriverWait wait;
+   // private LoginPage loginPage;
+   // private AppointmentPage appointmentPage;
+    //FinalPage finalpage;
+
+
+    @BeforeMethod
+    public void setupTest(){
+
+        System.setProperty("webdriver.chrome.driver","drivers/chromedriver.exe");
+        driver = new ChromeDriver();
+        driver.get("http://demo.nopcommerce.com/");
+        homePage = new HomePage(driver);
+    }
+
+    @Test
+    public void testRegister(){
+
+        registerPage = homePage.clickInRegister();
+
+    }
+
+    /*
+    @Test
+    public void testLogin(){
+
+        loginPage = menuPage.clickAppointment();
+        appointmentPage = loginPage.loginSuccess("John Doe","ThisIsNotAPassword");
+        Assert.assertTrue(appointmentPage.textDisplayedAfterLogin()); //chequeo que se muestra el texto luego del login
+    }
+     */
+
+     /*
 
     @Test
     public void test_NavegarARegister()
@@ -45,7 +86,7 @@ public class TestNopcommerce {
         String email= "pedrofernandez2133@gmail.com";
         String company= "PedFe S.A";
         String password= "pedro1234";
-        String gender ="f";
+        String gender ="m";
         String confirmpassword= password;
         String dayBirth ="20";
         String monthBirth ="October";
@@ -112,13 +153,19 @@ public class TestNopcommerce {
 
         Assert.assertEquals(driver.findElement(By.className("result")).getText(),"Your registration completed");
 
-       // driver.quit(); //cierro todo
+       // driver.quit(); //cierro
 
     }
 
+    */
 
 
 
 
 
+
+    @AfterMethod
+    public void teardown(){
+        driver.quit();
+    }
 }
