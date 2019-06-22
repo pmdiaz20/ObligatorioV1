@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.Select;
 
 public class RegisterPage extends BasePage  {
 
@@ -26,8 +27,6 @@ public class RegisterPage extends BasePage  {
     @FindBy(how = How.ID, using = "ConfirmPassword")
     WebElement confirmPass;
 
-    //Datos opcionales //Gender ,Date of birth 3 selects,Company name,Newsletter
-
     @FindBy(how = How.ID, using ="Company")
     WebElement compania;
 
@@ -40,26 +39,20 @@ public class RegisterPage extends BasePage  {
     @FindBy(how = How.ID, using ="Newsletter")
     WebElement noticias;
 
+    @FindBy(how = How.ID, using = "register-button")
+    WebElement btnRegister;
+
+    @FindBy(how = How.CLASS_NAME, using = "DateOfBirthDay")
+    WebElement diaDeCumple;
+
+    @FindBy(how = How.CLASS_NAME, using = "DateOfBirthMonth")
+    WebElement mesDeCumple;
+
+    @FindBy(how = How.CLASS_NAME, using = "DateOfBirthYear")
+    WebElement anioDeCumple;
+
     /*
 
-
-WebElement newsletter = driver.findElement(By.id("Newsletter"));
-        newsletter.click();
-
-        WebElement btnRegister = driver.findElement(By.id("register-button"));
-        btnRegister.click();
-
-
-        Assert.assertTrue(inputCompany.isDisplayed());
-        Assert.assertTrue(inputCompany.isEnabled());
-
-
-    WebElement maleRadioBtn = driver.findElement(By.id("gender-male"));
-        Assert.assertTrue(maleRadioBtn.isDisplayed());
-        Assert.assertTrue(maleRadioBtn.isEnabled());
-    WebElement femaleRadioBtn = driver.findElement(By.id("gender-female"));
-        Assert.assertTrue(femaleRadioBtn.isDisplayed());
-        Assert.assertTrue(femaleRadioBtn.isEnabled()); */
 /*
 //Datos obligatorios
 
@@ -76,10 +69,10 @@ WebElement newsletter = driver.findElement(By.id("Newsletter"));
 
  */
 
-    public void registerOK(String firstname,
-            String lastname,String email,String company,
-            String password,String confirmpassword, String gender, String newsletters,
-            String dayBirth,String monthBirth,String yearBirth) {
+    public RegisterResultPage registerOK(String gender, String firstname,String lastname,
+                           String dayBirth,String monthBirth,String yearBirth,
+                           String email,String company,String newsletter,
+                           String password,String confirmpassword) {
 
         nombre.sendKeys(firstname);
         apellido.sendKeys(lastname);
@@ -88,23 +81,86 @@ WebElement newsletter = driver.findElement(By.id("Newsletter"));
         confirmPass.sendKeys(confirmpassword);
         compania.sendKeys(company);
 
-        if (newsletters.equals("y"))
+        Select seleccionarDia = new Select(diaDeCumple);
+        seleccionarDia.selectByVisibleText(dayBirth);
+
+        Select seleccionarMes = new Select(mesDeCumple);
+        seleccionarMes.selectByVisibleText(monthBirth);
+
+        Select seleccionarAnio = new Select(anioDeCumple);
+        seleccionarAnio.selectByVisibleText(yearBirth);
+
+        if (newsletter.equals("YES"))
         {
             noticias.click();
         }
-        
-        if (gender.equals("m"))
+
+        if (gender.equals("M"))
         {
             generoMasculino.click();
          //   Assert.assertTrue(maleRadioBtn.isSelected());
         }
-        else if (gender == "f")
+        else if (gender == "F")
         {
             generoFemenino.click();
            // Assert.assertTrue(femaleRadioBtn.isSelected());
         }
 
+        btnRegister.click();
+
+        return new RegisterResultPage(driver);
+    }
 
 
+    public boolean firstNameIsDisplayed(){
+        return nombre.isDisplayed();
+    }
+
+    public boolean lastNameIsDisplayed(){
+        return apellido.isDisplayed();
+    }
+
+    public boolean emailIsDisplayed(){
+        return correo.isDisplayed();
+    }
+
+    public boolean passwordIsDisplayed(){
+        return pass.isDisplayed();
+    }
+
+    public boolean confirmPasswordIsDisplayed(){
+        return confirmPass.isDisplayed();
+    }
+
+    public boolean companyIsDisplayed(){
+        return compania.isDisplayed();
+    }
+
+    public boolean genderMaleIsDisplayed(){
+        return generoMasculino.isDisplayed();
+    }
+
+    public boolean genderFemaleIsDisplayed(){
+        return generoFemenino.isDisplayed();
+    }
+
+    public boolean newsletterIsDisplayed(){
+        return noticias.isDisplayed();
+    }
+
+    public boolean btnRegisterIsDisplayed(){
+        return btnRegister.isDisplayed();
+    }
+
+    public boolean dropDayBirthIsDisplayed(){
+        return diaDeCumple.isDisplayed();
+    }
+
+    public boolean dropMonthBirthIsDisplayed(){
+        return mesDeCumple.isDisplayed();
+    }
+
+    public boolean dropYearBirthIsDisplayed(){
+        return anioDeCumple.isDisplayed();
     }
 }
