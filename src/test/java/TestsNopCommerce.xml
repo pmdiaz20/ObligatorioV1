@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="SingleSuite" verbose="1">
+
+    <!-- Comentarios
+    <parameter name="gender" value="M"/>
+    <parameter name="firstname" value="Pablo"/>
+    <parameter name="lastname" value="Martinez"/>
+    <parameter name="dayBirth" value="19"/>
+    <parameter name="monthBirth" value="09"/>
+    <parameter name="yearBirth" value="1989"/>
+    <parameter name="email" value="PabloMartinez@gmail.com"/>
+    <parameter name="company" value="PabloMartinez SRL"/>
+    <parameter name="newsletter" value="Y"/>
+    <parameter name="password" value="PabloMartinez123"/>
+    <parameter name="confirmpassword" value="PabloMartinez123"/>
+                 Fin Comentarios -->
+
+
+     <test name="testPages">
+
+         <classes>
+             <class name = "TestNopcommerce">
+                 <methods>
+                     <include name="testRegister"/>
+                 </methods>
+             </class>
+         </classes>
+
+
+    </test>
+</suite>
