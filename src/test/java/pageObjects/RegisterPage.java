@@ -1,9 +1,11 @@
 package pageObjects;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
 public class RegisterPage extends BasePage  {
@@ -51,23 +53,6 @@ public class RegisterPage extends BasePage  {
     @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthYear']")
     WebElement anioDeCumple;
 
-    /*
-
-/*
-//Datos obligatorios
-
-        Assert.assertTrue(inputFirstName.isDisplayed());
-        Assert.assertTrue(inputFirstName.isEnabled());
-        Assert.assertTrue(inputLastName.isDisplayed());
-        Assert.assertTrue(inputLastName.isEnabled());
-        Assert.assertTrue(inputEmail.isDisplayed());
-        Assert.assertTrue(inputEmail.isEnabled());
-        Assert.assertTrue(inputPassword.isDisplayed());
-        Assert.assertTrue(inputPassword.isEnabled());
-        Assert.assertTrue(inputConfirmPassword.isDisplayed());
-        Assert.assertTrue(inputConfirmPassword.isEnabled());
-
- */
 
     public RegisterResultPage registerOK(String gender, String firstname,String lastname,
                            String dayBirth,String monthBirth,String yearBirth,
@@ -111,56 +96,85 @@ public class RegisterPage extends BasePage  {
         return new RegisterResultPage(driver);
     }
 
+    public boolean firstNameIsDisplayed(){return nombre.isDisplayed();}
 
-    public boolean firstNameIsDisplayed(){
-        return nombre.isDisplayed();
+    public boolean lastNameIsDisplayed(){return apellido.isDisplayed();}
+
+    public boolean emailIsDisplayed(){return correo.isDisplayed();}
+
+    public boolean passwordIsDisplayed(){return pass.isDisplayed();}
+
+    public boolean confirmPasswordIsDisplayed(){return confirmPass.isDisplayed();}
+
+    public boolean companyIsDisplayed(){return compania.isDisplayed();}
+
+    public boolean genderMaleIsDisplayed(){return generoMasculino.isDisplayed();}
+
+    public boolean genderFemaleIsDisplayed(){return generoFemenino.isDisplayed();}
+
+    public boolean newsletterIsDisplayed(){return noticias.isDisplayed();}
+
+    public boolean btnRegisterIsDisplayed(){return btnRegister.isDisplayed();}
+
+    public boolean dropDayBirthIsDisplayed(){return diaDeCumple.isDisplayed();}
+
+    public boolean dropMonthBirthIsDisplayed(){return mesDeCumple.isDisplayed();}
+
+    public boolean dropYearBirthIsDisplayed(){return anioDeCumple.isDisplayed();}
+
+
+    public void registerNotOK(String gender, String firstname,String lastname,
+                                         String dayBirth,String monthBirth,String yearBirth,
+                                         String email,String company,String newsletter,
+                                         String password,String confirmpassword) {
+        nombre.sendKeys(firstname);
+        apellido.sendKeys(lastname);
+        correo.sendKeys(email);
+        pass.sendKeys(password);
+        confirmPass.sendKeys(confirmpassword);
+        compania.sendKeys(company);
+        Select seleccionarDia = new Select(diaDeCumple);
+        seleccionarDia.selectByVisibleText(dayBirth);
+        Select seleccionarMes = new Select(mesDeCumple);
+        seleccionarMes.selectByVisibleText(monthBirth);
+        Select seleccionarAnio = new Select(anioDeCumple);
+        seleccionarAnio.selectByVisibleText(yearBirth);
+        if (newsletter.equals("YES"))
+        {
+            noticias.click();
+        }
+        if (gender.equals("M"))
+        {
+            generoMasculino.click();
+            //   Assert.assertTrue(maleRadioBtn.isSelected());
+        }
+        else if (gender == "F")
+        {
+            generoFemenino.click();
+            // Assert.assertTrue(femaleRadioBtn.isSelected());
+        }
+        btnRegister.click();
+
+        wait.until(ExpectedConditions.or(
+                (ExpectedConditions.visibilityOfElementLocated(By.id("FirstName-error"))),
+                (ExpectedConditions.visibilityOfElementLocated(By.id("LastName-error"))),
+                (ExpectedConditions.visibilityOfElementLocated(By.id("Email-error"))),
+                (ExpectedConditions.visibilityOfElementLocated(By.id("Password-error"))),
+                (ExpectedConditions.visibilityOfElementLocated(By.id("ConfirmPassword-error")))
+        ));
+
     }
 
-    public boolean lastNameIsDisplayed(){
-        return apellido.isDisplayed();
+
+    public boolean textDisplayedAfterRegisterNotSuccess() {
+        return driver.findElement(By.xpath("//*[@id=\"login\"]/div/div/div[1]/p[2]"))   .getText().contains("Login failed! Please ensure the username and password are valid.");
     }
 
-    public boolean emailIsDisplayed(){
-        return correo.isDisplayed();
-    }
 
-    public boolean passwordIsDisplayed(){
-        return pass.isDisplayed();
-    }
 
-    public boolean confirmPasswordIsDisplayed(){
-        return confirmPass.isDisplayed();
-    }
 
-    public boolean companyIsDisplayed(){
-        return compania.isDisplayed();
-    }
+}// Fin de clase RegisterPage
 
-    public boolean genderMaleIsDisplayed(){
-        return generoMasculino.isDisplayed();
-    }
 
-    public boolean genderFemaleIsDisplayed(){
-        return generoFemenino.isDisplayed();
-    }
 
-    public boolean newsletterIsDisplayed(){
-        return noticias.isDisplayed();
-    }
 
-    public boolean btnRegisterIsDisplayed(){
-        return btnRegister.isDisplayed();
-    }
-
-    public boolean dropDayBirthIsDisplayed(){
-        return diaDeCumple.isDisplayed();
-    }
-
-    public boolean dropMonthBirthIsDisplayed(){
-        return mesDeCumple.isDisplayed();
-    }
-
-    public boolean dropYearBirthIsDisplayed(){
-        return anioDeCumple.isDisplayed();
-    }
-}

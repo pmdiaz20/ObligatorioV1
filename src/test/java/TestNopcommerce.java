@@ -2,6 +2,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -67,10 +68,64 @@ public class TestNopcommerce {
         Assert.assertTrue(registerPage.dropMonthBirthIsDisplayed());
         Assert.assertTrue(registerPage.dropYearBirthIsDisplayed());
 
+        /*
+//Datos obligatorios
+
+        Assert.assertTrue(inputFirstName.isDisplayed());
+        Assert.assertTrue(inputFirstName.isEnabled());
+        Assert.assertTrue(inputLastName.isDisplayed());
+        Assert.assertTrue(inputLastName.isEnabled());
+        Assert.assertTrue(inputEmail.isDisplayed());
+        Assert.assertTrue(inputEmail.isEnabled());
+        Assert.assertTrue(inputPassword.isDisplayed());
+        Assert.assertTrue(inputPassword.isEnabled());
+        Assert.assertTrue(inputConfirmPassword.isDisplayed());
+        Assert.assertTrue(inputConfirmPassword.isEnabled());
+
+ */
+
         registerResultPage = registerPage.registerOK(gender,firstname,lastname,dayBirth,monthBirth,yearBirth,
                  email,company,newsletter,password,confirmpassword);
 
     }
+
+
+    @Test(dataProvider = "SearchProviderToRegister",dataProviderClass = DataProviderClass.class)
+    public void testRegisterNotOK(String gender,String firstname,String lastname,
+                             String dayBirth,String monthBirth,String yearBirth,
+                             String email,String company,String newsletter,
+                             String password,String confirmpassword) throws InterruptedException {
+
+        registerPage = homePage.clickInRegister();
+        Assert.assertTrue(registerPage.firstNameIsDisplayed());
+        Assert.assertTrue(registerPage.lastNameIsDisplayed());
+        Assert.assertTrue(registerPage.genderMaleIsDisplayed());
+        Assert.assertTrue(registerPage.genderFemaleIsDisplayed());
+        Assert.assertTrue(registerPage.emailIsDisplayed());
+        Assert.assertTrue(registerPage.companyIsDisplayed());
+        Assert.assertTrue(registerPage.newsletterIsDisplayed());
+        Assert.assertTrue(registerPage.passwordIsDisplayed());
+        Assert.assertTrue(registerPage.confirmPasswordIsDisplayed());
+        Assert.assertTrue(registerPage.btnRegisterIsDisplayed());
+        Assert.assertTrue(registerPage.dropDayBirthIsDisplayed());
+        Assert.assertTrue(registerPage.dropMonthBirthIsDisplayed());
+        Assert.assertTrue(registerPage.dropYearBirthIsDisplayed());
+
+        registerResultPage = registerPage.registerOK(gender, firstname, lastname, dayBirth, monthBirth, yearBirth,
+                email, company, newsletter, password, confirmpassword);
+
+
+    }
+
+/*
+    public void loginNotSuccess (String usuario, String password){
+        inputUser.sendKeys(usuario);
+        inputPassword.sendKeys(password);
+        loginButton.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"login\"]/div/div/div[1]/p[2]")));
+
+    }
+ */
 
     /*
     @Test
