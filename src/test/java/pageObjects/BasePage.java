@@ -6,8 +6,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
 
-    //es para que todas las pages hereden de esta pagina
-
     protected WebDriver driver;
     protected WebDriverWait wait;
 

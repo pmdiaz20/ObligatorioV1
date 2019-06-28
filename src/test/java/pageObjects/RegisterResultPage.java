@@ -11,6 +11,9 @@ public class RegisterResultPage extends BasePage {
     @FindBy(how = How.CLASS_NAME , using = "result")
     WebElement claseResultad;
 
+    @FindBy(xpath = "//*[contains(text(),'Your registration completed')]")
+    WebElement txtRegisterCompleted;
+
     public RegisterResultPage(WebDriver driver) {
         super(driver);
 
@@ -18,6 +21,9 @@ public class RegisterResultPage extends BasePage {
 
     @FindBy(how = How.CLASS_NAME, using = "button-1 register-continue-button")
     WebElement btnCotinuar;
+
+
+    public boolean txtOKRegisterIsDisplayed(){return txtRegisterCompleted.isDisplayed();}
 
     public boolean btnContinuarIsDisplayed(){
         return  btnCotinuar.isDisplayed();

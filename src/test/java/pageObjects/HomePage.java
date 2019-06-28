@@ -15,19 +15,12 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    @FindBy(how = How.XPATH, using = "/html/body/div[6]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a")
+    //"/html/body/div[6]/div[1]/div[1]/div[2]/div[1]/ul/li[1]/a")
+    @FindBy(how = How.XPATH, using = "//*[@class= 'header-links']//*[text()='Register']")
     WebElement btnRegister;
 
-    /*
-    @FindBy(how = How.ID,using = "btn-make-appointment")
-    WebElement botonMakeAppointment;
-
-    public LoginPage clickAppointment(){
-        botonMakeAppointment.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h2")));
-        return new LoginPage(driver);
-    }
-     */
+    @FindBy(how = How.XPATH, using = "//*[@class= 'header-links']//*[text()='Log in']")
+    WebElement btnLogIn;
 
     public RegisterPage clickInRegister(){
 
@@ -36,4 +29,16 @@ public class HomePage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
         return new RegisterPage(driver);
     }
+
+    public LoginPage clickInLogIn(){
+        btnLogIn.click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Email")));
+        return new LoginPage(driver);
+    }
+
+
+
+
+
 }

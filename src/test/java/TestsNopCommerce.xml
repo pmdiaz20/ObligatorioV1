@@ -16,17 +16,22 @@
     <parameter name="confirmpassword" value="PabloMartinez123"/>
                  Fin Comentarios -->
 
+    <parameter name="valid_user" value="mail_00@mail.com"/>
+    <parameter name="valid_pass" value="pass00"/>
 
      <test name="testPages">
-
+         <parameter name="browser" value="chrome"/>
          <classes>
              <class name = "TestNopcommerce">
                  <methods>
-                     <include name="testRegister"/>
-                 </methods>
-             </class>
-         </classes>
+                       <include name="testSearchProduct"/>
+                       <exclude name="testBrowser"/>
+                       <exclude name="testRegister"/>
+                     <!--  <include name="testRegisterNotOK"/> -->
+                   </methods>
+               </class>
+           </classes>
 
 
-    </test>
-</suite>
+      </test>
+  </suite>
