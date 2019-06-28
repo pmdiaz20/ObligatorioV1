@@ -16,7 +16,7 @@
     <parameter name="confirmpassword" value="PabloMartinez123"/>
                  Fin Comentarios -->
 
-    <parameter name="valid_user" value="mail_00@mail.com"/>
+    <parameter name="valid_email" value="mail_00@mail.com"/>
     <parameter name="valid_pass" value="pass00"/>
 
      <test name="testPages">

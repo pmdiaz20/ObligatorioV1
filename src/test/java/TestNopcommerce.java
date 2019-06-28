@@ -37,11 +37,13 @@ public class TestNopcommerce {
     private RegisterPage registerPage;
     private RegisterResultPage registerResultPage;
     private LoginPage loginPage;
+    String valid_email;
+    String valid_pass;
     SoftAssert SA;
 
     @BeforeMethod(alwaysRun = true)
-    @Parameters("browser")
-    public void setupTest(String browser){
+    @Parameters({"valid_email", "valid_pass","browser"})
+    public void setupTest(String valid_email, String valid_pass, String browser){
 
         if(browser.equalsIgnoreCase("chrome")) {
             System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
@@ -55,6 +57,8 @@ public class TestNopcommerce {
         driver.get("http://demo.nopcommerce.com/");
         homePage = new HomePage(driver);
         SA = new SoftAssert();
+        this.valid_email = valid_email;
+        this.valid_pass = valid_pass;
 
     }
 /*
@@ -99,6 +103,7 @@ public class TestNopcommerce {
     public void testSearchProduct(){
 
         loginPage = homePage.clickInLogIn();
+
 
     }
 
