@@ -14,20 +14,21 @@
     <parameter name="newsletter" value="Y"/>
     <parameter name="password" value="PabloMartinez123"/>
     <parameter name="confirmpassword" value="PabloMartinez123"/>
-                 Fin Comentarios -->
+                 Fin Comentarios
 
     <parameter name="valid_email" value="mail_00@mail.com"/>
-    <parameter name="valid_pass" value="pass00"/>
+    <parameter name="valid_pass" value="pass00"/>-->
 
      <test name="testPages">
          <parameter name="browser" value="chrome"/>
          <classes>
              <class name = "TestNopcommerce">
                  <methods>
-                       <include name="testSearchProduct"/>
                        <exclude name="testBrowser"/>
                        <exclude name="testRegister"/>
-                     <!--  <include name="testRegisterNotOK"/> -->
+                       <exclude name="testCP1RegistrarUsuario"/>
+                       <include name="testCP2CheckoutConEfectivo"/>
+
                    </methods>
                </class>
            </classes>
