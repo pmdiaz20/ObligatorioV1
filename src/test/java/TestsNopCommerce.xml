@@ -2,20 +2,7 @@
 
 <suite name="SingleSuite" verbose="1">
 
-    <!-- Comentarios
-    <parameter name="gender" value="M"/>
-    <parameter name="firstname" value="Pablo"/>
-    <parameter name="lastname" value="Martinez"/>
-    <parameter name="dayBirth" value="19"/>
-    <parameter name="monthBirth" value="09"/>
-    <parameter name="yearBirth" value="1989"/>
-    <parameter name="email" value="PabloMartinez@gmail.com"/>
-    <parameter name="company" value="PabloMartinez SRL"/>
-    <parameter name="newsletter" value="Y"/>
-    <parameter name="password" value="PabloMartinez123"/>
-    <parameter name="confirmpassword" value="PabloMartinez123"/>
-                 Fin Comentarios
-
+    <!--
     <parameter name="valid_email" value="mail_00@mail.com"/>
     <parameter name="valid_pass" value="pass00"/>-->
 

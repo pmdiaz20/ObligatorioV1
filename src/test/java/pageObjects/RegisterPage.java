@@ -97,8 +97,6 @@ public class RegisterPage extends BasePage  {
 
         // espero hasta que aparezca el texto Your registration completed
 
-        // <div class="buttons">
-        // <input type="submit" name="register-continue" class="button-1 register-continue-button" value="Continue"></div>
 
         //*[text()='Your registration completed']
 

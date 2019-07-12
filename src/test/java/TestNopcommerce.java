@@ -1,57 +1,10 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Select;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
-import pageObjects.*;
+import utils.DataProviderClass;
 
 
-
-public class TestNopcommerce {
-
-    private WebDriver driver;
-    private HomePage homePage;
-    private NavigateBar navigateBar;
-    private RegisterPage registerPage;
-    private RegisterResultPage registerResultPage;
-    private LoginPage loginPage;
-    private ResultsPage resultsPage;
-    private ShoppingCartPage shoppingCartPage;
-    private CheckoutPage checkoutPage;
+public class TestNopcommerce extends BaseTest{
 
 
-    SoftAssert SA;
-
-    @BeforeMethod(alwaysRun = true)
-    @Parameters("browser")
-    public void setupTest(String browser){
-
-        if(browser.equalsIgnoreCase("chrome")) {
-            ChromeOptions opt = new ChromeOptions();
-            opt.addArguments("disable-infobars");
-            System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-            driver = new ChromeDriver(opt);
-        }
-        else if(browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver", "drivers/geckodriver.exe");
-            driver = new FirefoxDriver();
-        }
-
-        driver.get("http://demo.nopcommerce.com/");
-        driver.manage().window().maximize();
-        homePage = new HomePage(driver);
-        SA = new SoftAssert();
-
-    }
 
     @Test(dataProvider = "SearchProviderToRegister",dataProviderClass = DataProviderClass.class)
     public void testCP1RegistrarUsuario(String gender,String firstname,String lastname,
@@ -92,24 +45,23 @@ public class TestNopcommerce {
         loginPage.login(valid_user,valid_password);
         resultsPage= homePage.searchProduct(productToSearch);
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+
         resultsPage.addProductToShoppingCart();
         shoppingCartPage = homePage.clickInShoppingCart();
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
+
         checkoutPage= shoppingCartPage.clickInCheckout();
-        checkoutPage.completar(pais,ciudad,direccion1,direccion2,codigoPostal,telefono,fax);
+        checkoutCompletePage= checkoutPage.realizarCheckoutConEfectivo(pais,ciudad,direccion1,direccion2,codigoPostal,telefono,fax);
+        SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
 
-
+        checkoutCompletePage.finalizeOrder();
 
 
     }
 
 
 
-    @AfterMethod(alwaysRun = true)
-    public void teardown(){
-        driver.quit();
-        SA.assertAll();
-    }
+
 
 
 }// Fin clase
