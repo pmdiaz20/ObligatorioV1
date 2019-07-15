@@ -11,11 +11,9 @@
          <classes>
              <class name = "TestNopcommerce">
                  <methods>
-                       <exclude name="testBrowser"/>
-                       <exclude name="testRegister"/>
-                       <exclude name="testCP1RegistrarUsuario"/>
-                       <include name="testCP2CheckoutConEfectivo"/>
-
+                       <include name="testCP1RegistrarUsuario"/>
+                       <exclude name="testCP2CheckoutConEfectivo"/>
+                       <include name="testCP3CheckoutConTarjeta"/>
                    </methods>
                </class>
            </classes>

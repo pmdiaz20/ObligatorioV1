@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ResultsPage extends BasePage {
 
@@ -20,6 +21,7 @@ public class ResultsPage extends BasePage {
 
     public void addProductToShoppingCart(){
         btnAddToCart.click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[@class='cart-label']"))));
     }
 
     public Boolean btnAddToCartIsDisplayed(){

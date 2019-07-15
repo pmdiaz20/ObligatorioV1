@@ -51,7 +51,7 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void teardown(){
-        driver.quit();
+    //    driver.quit();
         SA.assertAll();
     }
 

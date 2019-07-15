@@ -44,9 +44,11 @@ public class TestNopcommerce extends BaseTest{
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
         resultsPage= homePage.searchProduct(productToSearch);
+        System.out.println("busco producto");
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
 
         resultsPage.addProductToShoppingCart();
+        System.out.println("agrego producto en el carro");
         shoppingCartPage = homePage.clickInShoppingCart();
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
 
@@ -55,6 +57,31 @@ public class TestNopcommerce extends BaseTest{
         SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
 
         checkoutCompletePage.finalizeOrder();
+
+
+    }
+
+    @Test(dataProvider = "UserOkWithProductWithCreditCard",dataProviderClass = DataProviderClass.class)
+    public void testCP3CheckoutConTarjeta(String valid_user,String valid_password,String productToSearch,String pais, String ciudad, String direccion1, String direccion2,
+    String codigoPostal, String telefono, String fax, String marcaTarjeta,
+    String titularTarjeta,String numeroTarjeta,String expiracionMes,String expriacionAnio,
+    String codigoSeguridad){
+
+        loginPage = homePage.clickInLogIn();
+        loginPage.login(valid_user,valid_password);
+        resultsPage= homePage.searchProduct(productToSearch);
+        System.out.println("busco producto");
+        SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+
+        resultsPage.addProductToShoppingCart();
+        System.out.println("agrego producto en el carro");
+        shoppingCartPage = homePage.clickInShoppingCart();
+        SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
+
+        checkoutPage= shoppingCartPage.clickInCheckout();
+        checkoutCompletePage = checkoutPage.realizarCheckoutConTarjeta(pais,ciudad,direccion1,direccion2,codigoPostal,
+                telefono,fax,marcaTarjeta,titularTarjeta, numeroTarjeta, expiracionMes,expriacionAnio, codigoSeguridad);
+
 
 
     }

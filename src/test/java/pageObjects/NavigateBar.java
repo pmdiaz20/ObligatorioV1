@@ -62,7 +62,7 @@ public class NavigateBar  {
 
         headerbtnShoppingCart.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Shopping cart')]")));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='product-name']")));
+        wait.until(ExpectedConditions.elementToBeClickable(headerbtnShoppingCart));
         return new ShoppingCartPage(driver);
 
     }
