@@ -70,11 +70,9 @@ public class TestNopcommerce extends BaseTest{
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
         resultsPage= homePage.searchProduct(productToSearch);
-        System.out.println("busco producto");
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
 
         resultsPage.addProductToShoppingCart();
-        System.out.println("agrego producto en el carro");
         shoppingCartPage = homePage.clickInShoppingCart();
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
 
@@ -82,7 +80,13 @@ public class TestNopcommerce extends BaseTest{
         checkoutCompletePage = checkoutPage.realizarCheckoutConTarjeta(pais,ciudad,direccion1,direccion2,codigoPostal,
                 telefono,fax,marcaTarjeta,titularTarjeta, numeroTarjeta, expiracionMes,expriacionAnio, codigoSeguridad);
 
+        SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
 
+
+        // www.guru99.com/alert-popup-handling-selenium.html
+        //esperar que se muestre la alerta con un wait();
+        //driver.switchTo().alert().dismiss();
+        //driver.switchTo().alert().accept();
 
     }
 

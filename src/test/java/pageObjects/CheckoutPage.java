@@ -154,8 +154,10 @@ public class CheckoutPage extends BasePage {
                          String titularTarjeta,String numeroTarjeta,String expiracionMes,String expriacionAnio,
                          String codigoSeguridad){
 
-    //1 Billing address
+    //1//Billing address
+        checkShipToSameAddress.click();
         wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
+
         Select seleccionarCountry = new Select(selectCountryInBillingAddress);
         seleccionarCountry.selectByVisibleText(pais);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'Other (Non US)')]")));
@@ -165,24 +167,30 @@ public class CheckoutPage extends BasePage {
         inputPostalCodeInBillingAddress.sendKeys(codigoPostal);
         inputPhoneNumberInBillingAddress.sendKeys(telefono);
         inputFaxInBillingAddress.sendKeys(fax);
-        checkShipToSameAddress.click();
+
         btnContinueInBillingAddress.click();
+        System.out.println("Completo Billing Address y paso a Shipping Address");
 
         // 2 Shipping address
         wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
         btnContinueInShippingAddress.click();
+        System.out.println("Completo Shipping Address y paso a Shipping Method");
 
         //3 Shipping method
         wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
         btnContinueInShippingMethod.click();
+        System.out.println("Completo Shipping method y paso a Payment method");
 
         // 4 Payment method
         wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
         paymentMethod_CreditCard.click();
         btnContinueInPaymentMethod.click();
+        System.out.println("Elijo CreditCard y continuo a Payment information");
+
 
         //5 Payment information
 
+        wait.until(ExpectedConditions.elementToBeClickable(selectmarcaTarjetaInPaymentInformation));
         Select seleccionarmarcaDeTarjeta = new Select(selectmarcaTarjetaInPaymentInformation);
         seleccionarmarcaDeTarjeta.selectByValue(marcaTarjeta);
 
@@ -196,11 +204,18 @@ public class CheckoutPage extends BasePage {
         seleccionarAnioDeTarjeta.selectByVisibleText(expriacionAnio);
 
         inputCardCode.sendKeys(codigoSeguridad);
+        btnContinueInPaymentInfo.click();
 
         // 6 Confirm order
 
         wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
         btnConfirmOrder.click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='button-1 order-completed-continue-button']")));
+
+        // www.guru99.com/alert-popup-handling-selenium.html
+        //esperar que se muestre la alerta con un wait();
+        //driver.switchTo().alert().dismiss();
+        //driver.switchTo().alert().accept();
 
         return new CheckoutCompletePage(driver);
 
