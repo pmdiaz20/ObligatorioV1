@@ -14,6 +14,7 @@
                        <include name="testCP1RegistrarUsuario"/>
                        <exclude name="testCP2CheckoutConEfectivo"/>
                        <include name="testCP3CheckoutConTarjeta"/>
+                       <include name="testCP4agregarAWishList"/>
                    </methods>
                </class>
            </classes>

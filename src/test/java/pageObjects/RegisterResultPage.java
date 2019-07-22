@@ -1,10 +1,10 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class RegisterResultPage extends BasePage {
 
@@ -19,18 +19,25 @@ public class RegisterResultPage extends BasePage {
 
     }
 
-    @FindBy(how = How.CLASS_NAME, using = "button-1 register-continue-button")
-    WebElement btnCotinuar;
 
+
+    @FindBy(how = How.XPATH, using ="//input[@name='register-continue']")
+    WebElement btnContinuarInRegisterPageOK;
 
     public boolean txtOKRegisterIsDisplayed(){return txtRegisterCompleted.isDisplayed();}
 
     public boolean btnContinuarIsDisplayed(){
-        return  btnCotinuar.isDisplayed();
+        return  btnContinuarInRegisterPageOK.isDisplayed();
     }
 
     public boolean txtRegistoOkIsDisplayed(){
 
         return claseResultad.getText().contains("Your registration completed");
+    }
+
+    public void clickContinuarInRegisterPageOK()
+    {
+        wait.until(ExpectedConditions.elementToBeClickable(btnContinuarInRegisterPageOK));
+        btnContinuarInRegisterPageOK.click();
     }
 }

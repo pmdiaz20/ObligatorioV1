@@ -35,6 +35,7 @@ public class BasePage {
         return bar.searchProduct(productToSearch);
     }
 
+    public HomePage clickInlogout() { return bar.logout();}
 
 
 }

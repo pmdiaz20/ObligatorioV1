@@ -33,6 +33,10 @@ public class NavigateBar  {
     @FindBy(how = How.XPATH, using ="//span[@class='wishlist-label']")
     WebElement headerbtnWhisList;
 
+    @FindBy(how = How.XPATH, using ="//a[@class='ico-logout']")
+    WebElement btnLogout;
+
+
 
     public NavigateBar(WebDriver driver) {
         this.driver = driver;
@@ -73,5 +77,12 @@ public class NavigateBar  {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h2[@class='product-title']//a[contains(text(),'"+product+"')]")));
 
         return new ResultsPage(driver);
+    }
+
+    public HomePage logout() {
+       wait.until(ExpectedConditions.elementToBeClickable(btnLogout));
+        btnLogout.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ico-register']")));
+        return new HomePage(driver);
     }
 }
