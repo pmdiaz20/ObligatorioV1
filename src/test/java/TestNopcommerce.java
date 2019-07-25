@@ -1,4 +1,5 @@
 import com.aventstack.extentreports.Status;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.DataProviderClass;
 
@@ -73,6 +74,7 @@ public class TestNopcommerce extends BaseTest{
         resultsPage.addProductToShoppingCart();
         extentTest.log(Status.INFO, "agrego articulo " + productToSearch + " al carrito");
 
+
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito");
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
@@ -136,7 +138,7 @@ public class TestNopcommerce extends BaseTest{
 
     }
 
-
+//usar data provider
     @Test(dataProvider = "UserOkWithProductToWishList", dataProviderClass = DataProviderClass.class)
     public void testCP4agregarAWishList(String valid_user, String valid_password, String productToSearch, Method method) {
         extentTest = extentReports.createTest(method.getName());
@@ -145,12 +147,13 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Logueado Ok para correr testCP4agregarAWishList");
         resultsPage = homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
+
         resultsPage.addToWishList(productToSearch);
 
         extentTest.log(Status.INFO, "Agregue " + productToSearch + " a la Wishlist");
 
-
-        //   Assert.assertTrue(searchPage.isObjectAddedToWishList(productToSearch));
+        Assert.assertTrue(resultsPage.productAddedToWishList(productToSearch));
+     
       //  wishListPage = searchPage.goToWishList();
       //  Assert.assertTrue(wishListPage.verifyIfAt(productToSearch));
 
@@ -169,6 +172,19 @@ public class TestNopcommerce extends BaseTest{
 
 
 
+
+    @Test(dataProvider = "UserOkWithProductsToCompare", dataProviderClass = DataProviderClass.class)
+    public void testCP5CompararProductos (String valid_user, String valid_password, String productToSearch, Method method)
+    {
+        extentTest = extentReports.createTest(method.getName());
+
+        loginPage = homePage.clickInLogIn();
+        loginPage.login(valid_user,valid_password);
+        extentTest.log(Status.INFO, "Logueado Ok para correr testCP5CompararProductos");
+        resultsPage = homePage.searchProduct(productToSearch);
+
+        // FALTA TERMINAR
+    }
 
 
 

@@ -1,8 +1,6 @@
 package pageObjects;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -98,52 +96,114 @@ public class CheckoutPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@class='button-1 confirm-order-next-step-button']")
     WebElement btnConfirmOrder;
 
+    @FindBy(how = How.XPATH,using = "//input[@class='button-1 order-completed-continue-button']")
+    WebElement btnContinueInOrderCompleted;
+
     public CheckoutPage(WebDriver driver) {
         super(driver);
     }
 
+    public boolean isAlertPresent(){
+        boolean encuentraAlert = false;
+      //  WebDriverWait wait = new WebDriverWait(driver, 0 /*timeout in seconds*/);
+        try {
+            wait.until(ExpectedConditions.alertIsPresent());
+            encuentraAlert = true;
+            System.out.println("isAlertPresent : " +encuentraAlert);
+        } catch (TimeoutException eTO) {
+            encuentraAlert = false;
+            System.out.println("isAlertPresent : " +encuentraAlert);
+        }
+        return encuentraAlert;
+    }
+
+    public boolean aceptarAlerta()
+    {   Alert alert;
+        try
+        {
+            alert=driver.switchTo().alert();
+
+
+        }
+        catch(NoSuchElementException elementException)
+        {
+            return false;
+        }
+
+        alert.accept(); //Close Alert popup
+
+
+        return true;
+    }
 
     public CheckoutCompletePage realizarCheckoutConEfectivo(String pais, String ciudad, String direccion1, String direccion2, String codigoPostal, String telefono, String fax) {
 
-
-
-
-        //1 Billing address
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
-        Select seleccionarCountry = new Select(selectCountryInBillingAddress);
-        seleccionarCountry.selectByVisibleText(pais);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'Other (Non US)')]")));
-        inputCityInBillingAddress.sendKeys(ciudad);
-        inputAddress1InBillingAddress.sendKeys(direccion1);
-        inputAddress2InBillingAddress.sendKeys(direccion2);
-        inputPostalCodeInBillingAddress.sendKeys(codigoPostal);
-        inputPhoneNumberInBillingAddress.sendKeys(telefono);
-        inputFaxInBillingAddress.sendKeys(fax);
+        boolean primeraCompra = false;
         checkShipToSameAddress.click();
-        btnContinueInBillingAddress.click();
 
-        // 2 Shipping address
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
-        btnContinueInShippingAddress.click();
+        try
+        {
+            driver.findElement(By.xpath("//select[@id='billing-address-select']")).isDisplayed();
+        }
+        catch(Exception e)
+        {
+            primeraCompra = true;
+        }
 
-        //3 Shipping method
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
-        btnContinueInShippingMethod.click();
+        if (primeraCompra == false) {
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
+            btnContinueInBillingAddress.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
+            btnContinueInShippingAddress.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
+            btnContinueInShippingMethod.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
+            paymentMethod_Money.click();
+            btnContinueInPaymentMethod.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentInfo));
+            btnContinueInPaymentInfo.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
+            btnConfirmOrder.click();
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[contains(text(),'Your order has been successfully processed!')]")));
+        }
+        else { // si entra acá es porque se la primera compra que hace el usuario y no hay otra direccion
 
-        // 4 Payment method
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
-        paymentMethod_Money.click();
-        btnContinueInPaymentMethod.click();
+            //1 Billing address
+            Select seleccionarCountry = new Select(selectCountryInBillingAddress);
+            seleccionarCountry.selectByVisibleText(pais);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'Other (Non US)')]")));
+            inputCityInBillingAddress.sendKeys(ciudad);
+            inputAddress1InBillingAddress.sendKeys(direccion1);
+            inputAddress2InBillingAddress.sendKeys(direccion2);
+            inputPostalCodeInBillingAddress.sendKeys(codigoPostal);
+            inputPhoneNumberInBillingAddress.sendKeys(telefono);
+            inputFaxInBillingAddress.sendKeys(fax);
+            btnContinueInBillingAddress.click();
 
-        // 5 Payment information
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentInfo));
-        btnContinueInPaymentInfo.click();
+            // 2 Shipping address
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
+            btnContinueInShippingAddress.click();
 
-        // 6 Confirm order
-        wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
-        btnConfirmOrder.click();
+            //3 Shipping method
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
+            btnContinueInShippingMethod.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[contains(text(),'Your order has been successfully processed!')]")));
+            // 4 Payment method
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
+            paymentMethod_Money.click();
+            btnContinueInPaymentMethod.click();
+
+            // 5 Payment information
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentInfo));
+            btnContinueInPaymentInfo.click();
+
+            // 6 Confirm order
+            wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
+            btnConfirmOrder.click();
+
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//strong[contains(text(),'Your order has been successfully processed!')]")));
+
+        }
 
         return new CheckoutCompletePage(driver);
     }
@@ -154,68 +214,129 @@ public class CheckoutPage extends BasePage {
                          String titularTarjeta,String numeroTarjeta,String expiracionMes,String expriacionAnio,
                          String codigoSeguridad){
 
-    //1//Billing address
+        boolean primeraCompra = false;
+        wait.until(ExpectedConditions.elementToBeClickable(checkShipToSameAddress));
         checkShipToSameAddress.click();
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
 
-        Select seleccionarCountry = new Select(selectCountryInBillingAddress);
-        seleccionarCountry.selectByVisibleText(pais);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'Other (Non US)')]")));
-        inputCityInBillingAddress.sendKeys(ciudad);
-        inputAddress1InBillingAddress.sendKeys(direccion1);
-        inputAddress2InBillingAddress.sendKeys(direccion2);
-        inputPostalCodeInBillingAddress.sendKeys(codigoPostal);
-        inputPhoneNumberInBillingAddress.sendKeys(telefono);
-        inputFaxInBillingAddress.sendKeys(fax);
+        try
+        {
+            driver.findElement(By.xpath("//select[@id='billing-address-select']")).isDisplayed();
+        }
+        catch(Exception e)
+        {
+            primeraCompra = true;
+        }
 
-        btnContinueInBillingAddress.click();
-        System.out.println("Completo Billing Address y paso a Shipping Address");
+        if (primeraCompra == false) {
+            System.out.println("no es primera compra");
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
+            btnContinueInBillingAddress.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
+            btnContinueInShippingAddress.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
+            btnContinueInShippingMethod.click();
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
+            paymentMethod_CreditCard.click();
+            btnContinueInPaymentMethod.click();
+            wait.until(ExpectedConditions.elementToBeClickable(selectmarcaTarjetaInPaymentInformation));
+            Select seleccionarmarcaDeTarjeta = new Select(selectmarcaTarjetaInPaymentInformation);
+            seleccionarmarcaDeTarjeta.selectByValue(marcaTarjeta);
+            inputCardHolderName.sendKeys(titularTarjeta);
+            inputCardNumber.sendKeys(numeroTarjeta);
+            Select seleccionarMesDeTarjeta = new Select(expirationMonth);
+            seleccionarMesDeTarjeta.selectByVisibleText(expiracionMes);
+            Select seleccionarAnioDeTarjeta = new Select(expirationYear);
+            seleccionarAnioDeTarjeta.selectByVisibleText(expriacionAnio);
+            inputCardCode.sendKeys(codigoSeguridad);
+            btnContinueInPaymentInfo.click();
 
-        // 2 Shipping address
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
-        btnContinueInShippingAddress.click();
-        System.out.println("Completo Shipping Address y paso a Shipping Method");
 
-        //3 Shipping method
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
-        btnContinueInShippingMethod.click();
-        System.out.println("Completo Shipping method y paso a Payment method");
+            wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
+            btnConfirmOrder.click();
 
-        // 4 Payment method
-        wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
-        paymentMethod_CreditCard.click();
-        btnContinueInPaymentMethod.click();
-        System.out.println("Elijo CreditCard y continuo a Payment information");
+            if (isAlertPresent())
+            {
+                while (isAlertPresent())
+                {
+                    aceptarAlerta();
+                    btnConfirmOrder.click();
+                }
+            }
+
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='button-1 order-completed-continue-button']")));
+
+        }
+        else
+        {
+            System.out.println("es primera compra");
+
+            //1 Billing address
+
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
+
+            Select seleccionarCountry = new Select(selectCountryInBillingAddress);
+            seleccionarCountry.selectByVisibleText(pais);
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'Other (Non US)')]")));
+            inputCityInBillingAddress.sendKeys(ciudad);
+            inputAddress1InBillingAddress.sendKeys(direccion1);
+            inputAddress2InBillingAddress.sendKeys(direccion2);
+            inputPostalCodeInBillingAddress.sendKeys(codigoPostal);
+            inputPhoneNumberInBillingAddress.sendKeys(telefono);
+            inputFaxInBillingAddress.sendKeys(fax);
+
+            btnContinueInBillingAddress.click();
+            System.out.println("Completo Billing Address y paso a Shipping Address");
+
+            // 2 Shipping address
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
+            btnContinueInShippingAddress.click();
+            System.out.println("Completo Shipping Address y paso a Shipping Method");
+
+            //3 Shipping method
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
+            btnContinueInShippingMethod.click();
+            System.out.println("Completo Shipping method y paso a Payment method");
+
+            // 4 Payment method
+            wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
+            paymentMethod_CreditCard.click();
+            btnContinueInPaymentMethod.click();
+            System.out.println("Elijo CreditCard y continuo a Payment information");
 
 
-        //5 Payment information
+            //5 Payment information
 
-        wait.until(ExpectedConditions.elementToBeClickable(selectmarcaTarjetaInPaymentInformation));
-        Select seleccionarmarcaDeTarjeta = new Select(selectmarcaTarjetaInPaymentInformation);
-        seleccionarmarcaDeTarjeta.selectByValue(marcaTarjeta);
+            wait.until(ExpectedConditions.elementToBeClickable(selectmarcaTarjetaInPaymentInformation));
+            Select seleccionarmarcaDeTarjeta = new Select(selectmarcaTarjetaInPaymentInformation);
+            seleccionarmarcaDeTarjeta.selectByValue(marcaTarjeta);
 
-        inputCardHolderName.sendKeys(titularTarjeta);
-        inputCardNumber.sendKeys(numeroTarjeta);
+            inputCardHolderName.sendKeys(titularTarjeta);
+            inputCardNumber.sendKeys(numeroTarjeta);
 
-        Select seleccionarMesDeTarjeta = new Select(expirationMonth);
-        seleccionarMesDeTarjeta.selectByVisibleText(expiracionMes);
+            Select seleccionarMesDeTarjeta = new Select(expirationMonth);
+            seleccionarMesDeTarjeta.selectByVisibleText(expiracionMes);
 
-        Select seleccionarAnioDeTarjeta = new Select(expirationYear);
-        seleccionarAnioDeTarjeta.selectByVisibleText(expriacionAnio);
+            Select seleccionarAnioDeTarjeta = new Select(expirationYear);
+            seleccionarAnioDeTarjeta.selectByVisibleText(expriacionAnio);
 
-        inputCardCode.sendKeys(codigoSeguridad);
-        btnContinueInPaymentInfo.click();
+            inputCardCode.sendKeys(codigoSeguridad);
+            btnContinueInPaymentInfo.click();
 
-        // 6 Confirm order
+            // 6 Confirm order
 
-        wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
-        btnConfirmOrder.click();
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='button-1 order-completed-continue-button']")));
+            wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
+            btnConfirmOrder.click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='button-1 order-completed-continue-button']")));
 
-        // www.guru99.com/alert-popup-handling-selenium.html
-        //esperar que se muestre la alerta con un wait();
-        //driver.switchTo().alert().dismiss();
-        //driver.switchTo().alert().accept();
+            // www.guru99.com/alert-popup-handling-selenium.html
+            //esperar que se muestre la alerta con un wait();
+            //driver.switchTo().alert().dismiss();
+            //driver.switchTo().alert().accept();
+
+        }
+
+
+        //btnContinueInOrderCompleted.click();
 
         return new CheckoutCompletePage(driver);
 

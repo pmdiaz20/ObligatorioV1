@@ -2,18 +2,20 @@
 
 <suite name="SingleSuite" verbose="1">
 
-    <!--
-    <parameter name="valid_email" value="mail_00@mail.com"/>
-    <parameter name="valid_pass" value="pass00"/>-->
+
+    <parameter name="valid_user" value="mail_00@mail.com"/>
+    <parameter name="valid_password" value="pass00"/>
+
+    <parameter name="browser" value="chrome"/>
 
      <test name="testPages">
-         <parameter name="browser" value="chrome"/>
+
          <classes>
              <class name = "TestNopcommerce">
                  <methods>
-                       <include name="testCP1RegistrarUsuario"/>
+                       <exclude name="testCP1RegistrarUsuario"/>
                        <exclude name="testCP2CheckoutConEfectivo"/>
-                       <include name="testCP3CheckoutConTarjeta"/>
+                       <exclude name="testCP3CheckoutConTarjeta"/>
                        <include name="testCP4agregarAWishList"/>
                    </methods>
                </class>

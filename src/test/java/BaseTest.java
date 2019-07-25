@@ -31,6 +31,7 @@ public class BaseTest {
     protected SoftAssert SA;
     protected GetProperties properties = new GetProperties();
     protected String urlnopcommerce = properties.getString("URL");
+    protected WishListPage wishListPage;
 
 
     protected static ExtentHtmlReporter extentHtmlReporter;
@@ -39,7 +40,7 @@ public class BaseTest {
 
     @BeforeSuite(alwaysRun = true)
     @Parameters("browser")
-    public void setupSuite(@Optional("chrome") String browser){
+    public void setupSuite(String browser){
         if (browser.equalsIgnoreCase("chrome")) {
             ChromeOptions opt = new ChromeOptions();
             opt.addArguments("disable-infobars");
@@ -76,30 +77,9 @@ public class BaseTest {
         extentReports.setSystemInfo("Obligatorio", "Pablo Diaz");
     }
 
-    /*@BeforeMethod(alwaysRun = true)
-    @Parameters("browser")
-    public void setupTest(String browser){
-
-        if(browser.equalsIgnoreCase("chrome")) {
-            ChromeOptions opt = new ChromeOptions();
-            opt.addArguments("disable-infobars");
-            System.setProperty("webdriver.chrome.driver",properties.getString("CHROMEDRIVER_PATH"));
-            driver = new ChromeDriver(opt);
-        }
-        else if(browser.equalsIgnoreCase("firefox")) {
-            System.setProperty("webdriver.gecko.driver",properties.getString("FIREFOX_PATH"));
-            driver = new FirefoxDriver();
-        }
-
-        driver.get(urlnopcommerce);
-        driver.manage().window().maximize();
-        homePage = new HomePage(driver);
-        SA = new SoftAssert();
-
-    }*/
 
     @BeforeMethod(alwaysRun = true)
-    public void navegarInicio() {
+    public void navegarAPaginaInicial() {
         driver.get(urlnopcommerce);
         driver.manage().window().maximize();
         homePage = new HomePage(driver);
@@ -132,7 +112,7 @@ public class BaseTest {
     @AfterSuite(alwaysRun = true)
     public void flush(){
         extentReports.flush();
-        driver.quit();
+      //  driver.quit();
     }
 
 }

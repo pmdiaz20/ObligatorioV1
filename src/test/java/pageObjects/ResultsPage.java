@@ -51,6 +51,18 @@ public class ResultsPage extends BasePage {
         }
     }
 
+    public boolean productAddedToWishList(String product){
+        if(!encontrado) {
+            System.err.println("producto " + product + " no encontrado");
+            return false;
+        }
+        else {
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(("//p[@class='content']//*['The product has been added to your ']"))));
+            WebElement addToWishListSucces = driver.findElement(By.cssSelector(("//p[@class='content']//*['The product has been added to your ']")));
+            return addToWishListSucces.getText().contains("wishlist");
+        }
+    }
+
 /*
     public void addToCart(String object){
         for(ProductItem product : resultados){
