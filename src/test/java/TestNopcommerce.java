@@ -1,4 +1,5 @@
 import com.aventstack.extentreports.Status;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.DataProviderClass;
@@ -7,8 +8,6 @@ import java.lang.reflect.Method;
 
 
 public class TestNopcommerce extends BaseTest{
-
-
 
     @Test(dataProvider = "SearchProviderToRegister",dataProviderClass = DataProviderClass.class)
     public void testCP1RegistrarUsuario(String gender,String firstname,String lastname,
@@ -50,8 +49,6 @@ public class TestNopcommerce extends BaseTest{
         homePage.clickInlogout();
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP1RegistrarUsuario");
 
-
-
     }
 
 
@@ -74,10 +71,9 @@ public class TestNopcommerce extends BaseTest{
         resultsPage.addProductToShoppingCart();
         extentTest.log(Status.INFO, "agrego articulo " + productToSearch + " al carrito");
 
-
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito");
-        SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
+        SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
         extentTest.log(Status.INFO, "Valido que el producto "+ productToSearch + " esté en el carrito");
 
         checkoutPage= shoppingCartPage.clickInCheckout();
@@ -91,10 +87,9 @@ public class TestNopcommerce extends BaseTest{
         homePage.clickInlogout();
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP2CheckoutConEfectivo");
 
-
-
-
     }
+
+
 
     @Test(dataProvider = "UserOkWithProductWithCreditCard",dataProviderClass = DataProviderClass.class)
     public void testCP3CheckoutConTarjeta(String valid_user,String valid_password,String productToSearch,String pais, String ciudad, String direccion1, String direccion2,
@@ -112,9 +107,15 @@ public class TestNopcommerce extends BaseTest{
 
         resultsPage.addProductToShoppingCart();
         extentTest.log(Status.INFO, "Agregando articulo " + productToSearch + "al carrito");
+
+        extentTest.log(Status.INFO, "intento ir hasta arriba" );
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+        extentTest.log(Status.INFO, "fue hasta arriba" );
+
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito" );
-        SA.assertTrue(shoppingCartPage.productIsInShoppingCart());
+        SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
 
         checkoutPage= shoppingCartPage.clickInCheckout();
         extentTest.log(Status.INFO, "Clickeo en checkout");
@@ -124,17 +125,9 @@ public class TestNopcommerce extends BaseTest{
 
         SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
 
-
-        // www.guru99.com/alert-popup-handling-selenium.html
-        //esperar que se muestre la alerta con un wait();
-        //driver.switchTo().alert().dismiss();
-        //driver.switchTo().alert().accept();
-
         homePage.clickInlogout();
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP3CheckoutConTarjeta");
-
-
 
     }
 
@@ -144,33 +137,33 @@ public class TestNopcommerce extends BaseTest{
         extentTest = extentReports.createTest(method.getName());
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
-        extentTest.log(Status.INFO, "Logueado Ok para correr testCP4agregarAWishList");
+        extentTest.log(Status.INFO, "Login Ok para correr testCP4agregarAWishList");
         resultsPage = homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
 
         resultsPage.addToWishList(productToSearch);
 
-        extentTest.log(Status.INFO, "Agregue " + productToSearch + " a la Wishlist");
+        extentTest.log(Status.INFO, "Agrego " + productToSearch + " a la Wishlist");
 
         Assert.assertTrue(resultsPage.productAddedToWishList(productToSearch));
-     
+
+        extentTest.log(Status.INFO, "Se agrega ok " + productToSearch + " a la Wishlist");
+
+        driver.navigate().refresh();
+
+        extentTest.log(Status.INFO, "refresco pagina");
       //  wishListPage = searchPage.goToWishList();
       //  Assert.assertTrue(wishListPage.verifyIfAt(productToSearch));
 
+
         homePage.clickInlogout();
 
-
-
-
-
+        extentTest.log(Status.INFO, "Click en logout");
 
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP4agregarAWishList");
 
     }
-
-
-
 
 
     @Test(dataProvider = "UserOkWithProductsToCompare", dataProviderClass = DataProviderClass.class)
@@ -183,10 +176,16 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Logueado Ok para correr testCP5CompararProductos");
         resultsPage = homePage.searchProduct(productToSearch);
 
+        extentTest.log(Status.INFO, "Agrego " + productToSearch + " a compareList");
+
+        resultsPage.addToCompareList(productToSearch);
+
+        resultsPage.clickInCompareList();
+
+        driver.navigate().refresh();
+
         // FALTA TERMINAR
     }
-
-
 
 
 }// Fin clase

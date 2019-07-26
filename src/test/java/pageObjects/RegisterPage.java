@@ -54,8 +54,6 @@ public class RegisterPage extends BasePage  {
     WebElement anioDeCumple;
 
 
-
-
     public RegisterResultPage registerOK(String gender, String firstname,String lastname,
                            String dayBirth,String monthBirth,String yearBirth,
                            String email,String company,String newsletter,
@@ -120,82 +118,6 @@ public class RegisterPage extends BasePage  {
     public boolean dropMonthBirthIsDisplayed(){return mesDeCumple.isDisplayed();}
     public boolean dropYearBirthIsDisplayed(){return anioDeCumple.isDisplayed();}
 
-
-/*
-    public void registerNotOK(String gender, String firstname,String lastname,
-                                         String dayBirth,String monthBirth,String yearBirth,
-                                         String email,String company,String newsletter,
-                                         String password,String confirmpassword) {
-        nombre.sendKeys(firstname);
-        apellido.sendKeys(lastname);
-        correo.sendKeys(email);
-        pass.sendKeys(password);
-        confirmPass.sendKeys(confirmpassword);
-        compania.sendKeys(company);
-
-        Select seleccionarDia = new Select(diaDeCumple);
-        seleccionarDia.selectByVisibleText(dayBirth);
-
-        Select seleccionarMes = new Select(mesDeCumple);
-        seleccionarMes.selectByVisibleText(monthBirth);
-
-        Select seleccionarAnio = new Select(anioDeCumple);
-        seleccionarAnio.selectByVisibleText(yearBirth);
-
-        if (newsletter.equals("YES"))
-        {
-            noticias.click();
-        }
-
-        if (gender.equals("M"))
-        {
-            generoMasculino.click();
-        }
-        else if (gender == "F")
-        {
-            generoFemenino.click();
-        }
-
-        btnRegister.click();
-
-
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='message-error validation-summary-errors']")));
-
-       /* wait.until(ExpectedConditions.or(
-                (ExpectedConditions.visibilityOfElementLocated(By.id("FirstName-error"))),
-                (ExpectedConditions.visibilityOfElementLocated(By.id("LastName-error"))),
-                (ExpectedConditions.visibilityOfElementLocated(By.id("Email-error"))),
-                (ExpectedConditions.visibilityOfElementLocated(By.id("Password-error"))),
-                (ExpectedConditions.visibilityOfElementLocated(By.id("ConfirmPassword-error")))
-        ));
-
-    } */
-
-
-
-
-
-    /*
-
-    //The specified email already exists
-    public boolean textDisplayedAfterloginNotSuccess() {
-        boolean resultado = false;
-        if(driver.findElement(By.xpath("//*[@id=\"login\"]/div/div/div[1]/p[2]")).getText().contains("Login failed! Please ensure the username and password are valid."))
-        {
-            resultado=true;
-        }
-
-        return resultado;
-    }
-
-
-
-
-
-    public boolean textDisplayedAfterRegisterNotSuccess() {
-        return driver.findElement(By.xpath("//*[@id=\"login\"]/div/div/div[1]/p[2]"))   .getText().contains("Login failed! Please ensure the username and password are valid.");
-    }
- */
 
 
 }// Fin de clase RegisterPage

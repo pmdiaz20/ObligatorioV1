@@ -22,4 +22,8 @@ public class ProductItem {
     public void addToCart(){
         element.findElement(By.className("fa-shopping-cart")).click();
     }
+
+    public void addToCompare() {
+        element.findElement(By.xpath("//input[@value='Add to compare list']")).click();
+    }
 }

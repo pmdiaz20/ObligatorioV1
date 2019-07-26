@@ -105,7 +105,6 @@ public class CheckoutPage extends BasePage {
 
     public boolean isAlertPresent(){
         boolean encuentraAlert = false;
-      //  WebDriverWait wait = new WebDriverWait(driver, 0 /*timeout in seconds*/);
         try {
             wait.until(ExpectedConditions.alertIsPresent());
             encuentraAlert = true;
@@ -130,17 +129,16 @@ public class CheckoutPage extends BasePage {
             return false;
         }
 
-        alert.accept(); //Close Alert popup
-
+        alert.accept(); //cierro pop-up de alerta
 
         return true;
     }
+
 
     public CheckoutCompletePage realizarCheckoutConEfectivo(String pais, String ciudad, String direccion1, String direccion2, String codigoPostal, String telefono, String fax) {
 
         boolean primeraCompra = false;
         checkShipToSameAddress.click();
-
         try
         {
             driver.findElement(By.xpath("//select[@id='billing-address-select']")).isDisplayed();
@@ -285,23 +283,19 @@ public class CheckoutPage extends BasePage {
             inputFaxInBillingAddress.sendKeys(fax);
 
             btnContinueInBillingAddress.click();
-            System.out.println("Completo Billing Address y paso a Shipping Address");
 
             // 2 Shipping address
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
             btnContinueInShippingAddress.click();
-            System.out.println("Completo Shipping Address y paso a Shipping Method");
 
             //3 Shipping method
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingMethod));
             btnContinueInShippingMethod.click();
-            System.out.println("Completo Shipping method y paso a Payment method");
 
             // 4 Payment method
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInPaymentMethod));
             paymentMethod_CreditCard.click();
             btnContinueInPaymentMethod.click();
-            System.out.println("Elijo CreditCard y continuo a Payment information");
 
 
             //5 Payment information
@@ -328,10 +322,6 @@ public class CheckoutPage extends BasePage {
             btnConfirmOrder.click();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='button-1 order-completed-continue-button']")));
 
-            // www.guru99.com/alert-popup-handling-selenium.html
-            //esperar que se muestre la alerta con un wait();
-            //driver.switchTo().alert().dismiss();
-            //driver.switchTo().alert().accept();
 
         }
 

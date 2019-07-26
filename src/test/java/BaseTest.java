@@ -32,6 +32,7 @@ public class BaseTest {
     protected GetProperties properties = new GetProperties();
     protected String urlnopcommerce = properties.getString("URL");
     protected WishListPage wishListPage;
+    protected CompareProductsPage compareProductsPage;
 
 
     protected static ExtentHtmlReporter extentHtmlReporter;
@@ -105,14 +106,13 @@ public class BaseTest {
             extentTest.log(Status.PASS, "Test Case " + resultadoDeTest.getName() + " passed");
         }
 
-        //driver.quit(); este no va
     }
 
 
     @AfterSuite(alwaysRun = true)
     public void flush(){
         extentReports.flush();
-      //  driver.quit();
+        //driver.quit();
     }
 
 }

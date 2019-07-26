@@ -12,7 +12,6 @@ public class WishListProduct {
         this.element = element;
     }
 
-
     public String getName()
     {
         return element.findElement(By.cssSelector("td:nth-child(5)")).getText();
@@ -23,13 +22,9 @@ public class WishListProduct {
         element.findElement(By.xpath("//input[@name='addtocartbutton']")).click();
     }
 
-
-
     public void updateWishList()
     {
         element.findElement(By.xpath("//input[@name='updatecart']")).click();
     }
-
-
 
 }

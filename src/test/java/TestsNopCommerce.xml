@@ -16,7 +16,8 @@
                        <exclude name="testCP1RegistrarUsuario"/>
                        <exclude name="testCP2CheckoutConEfectivo"/>
                        <exclude name="testCP3CheckoutConTarjeta"/>
-                       <include name="testCP4agregarAWishList"/>
+                       <exclude name="testCP4agregarAWishList"/>
+                       <include name="testCP5CompararProductos"/>
                    </methods>
                </class>
            </classes>

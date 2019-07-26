@@ -28,9 +28,8 @@ public class ShoppingCartPage extends BasePage {
     }
 
 
-    public boolean productIsInShoppingCart(){
-
-        return driver.findElement(By.xpath("//a[@class='product-name']")).isDisplayed();
+    public boolean productIsInShoppingCart(String nombreProducto){
+        return driver.findElement(By.xpath("//a[@class='product-name']")).getText().contains(nombreProducto);
     }
 
 }

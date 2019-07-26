@@ -17,7 +17,6 @@ public class NavigateBar  {
     @FindBy(how = How.XPATH, using = "//*[@class= 'header-links']//*[text()='Register']")
     WebElement headerBtnRegister;
 
-    //@FindBy(how = How.XPATH, using = "//*[@class= 'header-links']//*[text()='Log in']")
     @FindBy(how = How.XPATH, using = "//a[@class='ico-login']")
     WebElement headerBtnLogIn;
 
@@ -47,18 +46,17 @@ public class NavigateBar  {
     public LoginPage clickInLogIn(){
 
         headerBtnLogIn.click();
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("Email")));
 
         return new LoginPage(driver);
     }
 
+
+
     public RegisterPage clickInRegister(){
 
         headerBtnRegister.click();
-        //driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
-
         return new RegisterPage(driver);
     }
 
