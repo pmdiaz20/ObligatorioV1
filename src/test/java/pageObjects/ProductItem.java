@@ -24,6 +24,6 @@ public class ProductItem {
     }
 
     public void addToCompare() {
-        element.findElement(By.xpath("//input[@value='Add to compare list']")).click();
+        element.findElement(By.cssSelector("input[value='Add to compare list']")).click();
     }
 }

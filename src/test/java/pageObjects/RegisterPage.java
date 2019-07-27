@@ -53,6 +53,8 @@ public class RegisterPage extends BasePage  {
     @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthYear']")
     WebElement anioDeCumple;
 
+    @FindBy(how = How.XPATH, using ="//li[contains(text(),'The specified email already exists')]")
+    WebElement textoMailExistente;
 
     public RegisterResultPage registerOK(String gender, String firstname,String lastname,
                            String dayBirth,String monthBirth,String yearBirth,
@@ -117,8 +119,43 @@ public class RegisterPage extends BasePage  {
     public boolean dropDayBirthIsDisplayed(){return diaDeCumple.isDisplayed();}
     public boolean dropMonthBirthIsDisplayed(){return mesDeCumple.isDisplayed();}
     public boolean dropYearBirthIsDisplayed(){return anioDeCumple.isDisplayed();}
+    public boolean msjErrorMailExistente(){return textoMailExistente.isDisplayed();}
 
+    public void registerNotOK(String gender, String firstname,String lastname,
+                                         String dayBirth,String monthBirth,String yearBirth,
+                                         String email,String company,String newsletter,
+                                         String password,String confirmpassword) {
 
+        nombre.sendKeys(firstname);
+        apellido.sendKeys(lastname);
+        correo.sendKeys(email);
+        pass.sendKeys(password);
+        confirmPass.sendKeys(confirmpassword);
+        compania.sendKeys(company);
+
+        Select seleccionarDia = new Select(diaDeCumple);
+        seleccionarDia.selectByVisibleText(dayBirth);
+
+        Select seleccionarMes = new Select(mesDeCumple);
+        seleccionarMes.selectByVisibleText(monthBirth);
+
+        Select seleccionarAnio = new Select(anioDeCumple);
+        seleccionarAnio.selectByVisibleText(yearBirth);
+
+        if (newsletter.equals("YES")) {
+            noticias.click();
+        }
+
+        if (gender.equals("M")) {
+            generoMasculino.click();
+            //   Assert.assertTrue(maleRadioBtn.isSelected());
+        } else if (gender == "F") {
+            generoFemenino.click();
+            // Assert.assertTrue(femaleRadioBtn.isSelected());
+        }
+
+        btnRegister.click();
+    }
 
 }// Fin de clase RegisterPage
 

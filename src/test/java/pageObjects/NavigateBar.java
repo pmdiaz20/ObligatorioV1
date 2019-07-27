@@ -1,6 +1,7 @@
 package pageObjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -62,6 +63,10 @@ public class NavigateBar  {
 
     public ShoppingCartPage clickInShoppingCart(){
 
+        // agrego javascript para scrollear hasta arriba
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
         headerbtnShoppingCart.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Shopping cart')]")));
         wait.until(ExpectedConditions.elementToBeClickable(headerbtnShoppingCart));

@@ -1,5 +1,4 @@
 import com.aventstack.extentreports.Status;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import utils.DataProviderClass;
@@ -109,8 +108,7 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Agregando articulo " + productToSearch + "al carrito");
 
         extentTest.log(Status.INFO, "intento ir hasta arriba" );
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,1000)");
+
         extentTest.log(Status.INFO, "fue hasta arriba" );
 
         shoppingCartPage = homePage.clickInShoppingCart();
@@ -121,10 +119,11 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Clickeo en checkout");
         checkoutCompletePage = checkoutPage.realizarCheckoutConTarjeta(pais,ciudad,direccion1,direccion2,codigoPostal,
                 telefono,fax,marcaTarjeta,titularTarjeta, numeroTarjeta, expiracionMes,expriacionAnio, codigoSeguridad);
-        extentTest.log(Status.INFO, "Complete los datos");
+        extentTest.log(Status.INFO, "Completo ok los datos");
 
         SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
 
+        checkoutCompletePage.finalizeOrder();
         homePage.clickInlogout();
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP3CheckoutConTarjeta");
@@ -186,6 +185,48 @@ public class TestNopcommerce extends BaseTest{
 
         // FALTA TERMINAR
     }
+
+
+
+    @Test(dataProvider = "SearchProviderToRegister",dataProviderClass = DataProviderClass.class)
+    public void testCP6ExtraRegistroConMailExistente(String gender,String firstname,String lastname,
+                                        String dayBirth,String monthBirth,String yearBirth,
+                                        String email,String company,String newsletter,
+                                        String password,String confirmpassword,Method method) throws InterruptedException{
+
+        extentTest = extentReports.createTest(method.getName());
+
+        registerPage = homePage.clickInRegister();
+        extentTest.log(Status.INFO, "Clickeo en Register");
+
+
+        SA.assertTrue(registerPage.firstNameIsDisplayed());
+        SA.assertTrue(registerPage.lastNameIsDisplayed());
+        SA.assertTrue(registerPage.genderMaleIsDisplayed());
+        SA.assertTrue(registerPage.genderFemaleIsDisplayed());
+        SA.assertTrue(registerPage.emailIsDisplayed());
+        SA.assertTrue(registerPage.companyIsDisplayed());
+        SA.assertTrue(registerPage.newsletterIsDisplayed());
+        SA.assertTrue(registerPage.passwordIsDisplayed());
+        SA.assertTrue(registerPage.confirmPasswordIsDisplayed());
+        SA.assertTrue(registerPage.btnRegisterIsDisplayed());
+        SA.assertTrue(registerPage.dropDayBirthIsDisplayed());
+        SA.assertTrue(registerPage.dropMonthBirthIsDisplayed());
+        SA.assertTrue(registerPage.dropYearBirthIsDisplayed());
+
+        extentTest.log(Status.INFO, "Procedo a completar los datos de registro");
+
+        registerPage.registerNotOK(gender,firstname,lastname,dayBirth,monthBirth,yearBirth,
+                email,company,newsletter,password,confirmpassword);
+        extentTest.log(Status.INFO, "complete todos los datos de registro");
+
+        SA.assertTrue((registerPage.msjErrorMailExistente()));
+
+        extentTest.log(Status.INFO, "Me aparece error al intentar registrar usuario con mail ya registrado");
+
+
+    }
+
 
 
 }// Fin clase

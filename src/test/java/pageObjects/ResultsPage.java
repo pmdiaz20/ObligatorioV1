@@ -61,6 +61,8 @@ public class ResultsPage extends BasePage {
             System.out.println(product.getName());
             product.addToCompare();
             System.out.println("Se agrega "+product.getName());
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='content']")));
+            driver.findElement(By.xpath("//span[@class='close']")).click();
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//p[@class='content']")));
 
 

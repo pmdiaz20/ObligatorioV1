@@ -5,6 +5,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckoutPage extends BasePage {
 
@@ -105,8 +106,10 @@ public class CheckoutPage extends BasePage {
 
     public boolean isAlertPresent(){
         boolean encuentraAlert = false;
+        WebDriverWait waitAlerta = new WebDriverWait(driver,3);
+
         try {
-            wait.until(ExpectedConditions.alertIsPresent());
+            waitAlerta.until(ExpectedConditions.alertIsPresent());
             encuentraAlert = true;
             System.out.println("isAlertPresent : " +encuentraAlert);
         } catch (TimeoutException eTO) {
@@ -220,13 +223,13 @@ public class CheckoutPage extends BasePage {
         {
             driver.findElement(By.xpath("//select[@id='billing-address-select']")).isDisplayed();
         }
+
         catch(Exception e)
         {
             primeraCompra = true;
         }
-
         if (primeraCompra == false) {
-            System.out.println("no es primera compra");
+            System.out.println("No es primera compra ese mail");
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
             btnContinueInBillingAddress.click();
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
@@ -266,10 +269,8 @@ public class CheckoutPage extends BasePage {
         }
         else
         {
-            System.out.println("es primera compra");
-
+            System.out.println("Es primera compra con ese mail");
             //1 Billing address
-
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
 
             Select seleccionarCountry = new Select(selectCountryInBillingAddress);
@@ -281,7 +282,6 @@ public class CheckoutPage extends BasePage {
             inputPostalCodeInBillingAddress.sendKeys(codigoPostal);
             inputPhoneNumberInBillingAddress.sendKeys(telefono);
             inputFaxInBillingAddress.sendKeys(fax);
-
             btnContinueInBillingAddress.click();
 
             // 2 Shipping address
@@ -297,27 +297,20 @@ public class CheckoutPage extends BasePage {
             paymentMethod_CreditCard.click();
             btnContinueInPaymentMethod.click();
 
-
             //5 Payment information
-
             wait.until(ExpectedConditions.elementToBeClickable(selectmarcaTarjetaInPaymentInformation));
             Select seleccionarmarcaDeTarjeta = new Select(selectmarcaTarjetaInPaymentInformation);
             seleccionarmarcaDeTarjeta.selectByValue(marcaTarjeta);
-
             inputCardHolderName.sendKeys(titularTarjeta);
             inputCardNumber.sendKeys(numeroTarjeta);
-
             Select seleccionarMesDeTarjeta = new Select(expirationMonth);
             seleccionarMesDeTarjeta.selectByVisibleText(expiracionMes);
-
             Select seleccionarAnioDeTarjeta = new Select(expirationYear);
             seleccionarAnioDeTarjeta.selectByVisibleText(expriacionAnio);
-
             inputCardCode.sendKeys(codigoSeguridad);
             btnContinueInPaymentInfo.click();
 
             // 6 Confirm order
-
             wait.until(ExpectedConditions.elementToBeClickable(btnConfirmOrder));
             btnConfirmOrder.click();
             wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@class='button-1 order-completed-continue-button']")));
