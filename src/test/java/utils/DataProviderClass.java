@@ -60,5 +60,14 @@ public class DataProviderClass {
                 };
     }
 
+    @DataProvider(name = "UserOkT0ChangePassword")
+    public static Object[][] getDataFromDataProviderUserOkT0ChangePassword(){
+        return new Object[][]
+                {        //mail                ,oldpasword, newpassword, confirmNewPassword
+
+                        {"ba22azssc_1@mail.com", "pass06","pass06","pass07"}
+                };
+    }
+
 
 }

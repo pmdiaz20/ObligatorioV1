@@ -33,6 +33,9 @@ public class NavigateBar  {
     @FindBy(how = How.XPATH, using ="//span[@class='wishlist-label']")
     WebElement headerbtnWhisList;
 
+    @FindBy(how = How.XPATH, using ="//a[@class='ico-account']")
+    WebElement headerBtnMyAccount;
+
     @FindBy(how = How.XPATH, using ="//a[@class='ico-logout']")
     WebElement btnLogout;
 
@@ -59,6 +62,13 @@ public class NavigateBar  {
         headerBtnRegister.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
         return new RegisterPage(driver);
+    }
+
+    public CustomerPage clickInMyAccount(){
+
+        headerBtnMyAccount.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'My account - Customer info')]")));
+        return new CustomerPage(driver);
     }
 
     public ShoppingCartPage clickInShoppingCart(){

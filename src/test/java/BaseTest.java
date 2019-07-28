@@ -33,6 +33,8 @@ public class BaseTest {
     protected String urlnopcommerce = properties.getString("URL");
     protected WishListPage wishListPage;
     protected CompareProductsPage compareProductsPage;
+    protected CustomerPage customerPage;
+    protected ChangePasswordPage changePasswordPage;
 
 
     protected static ExtentHtmlReporter extentHtmlReporter;

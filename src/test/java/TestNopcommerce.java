@@ -229,4 +229,42 @@ public class TestNopcommerce extends BaseTest{
 
 
 
+    @Test(dataProvider = "UserOkT0ChangePassword",dataProviderClass = DataProviderClass.class)
+    public void testCP7ExtraCambioDeMail(String mail,String password,String passwordNuevo,
+                                                     String confirmarPasswordNuevo,Method method) {
+
+        extentTest = extentReports.createTest(method.getName());
+
+        loginPage = homePage.clickInLogIn();
+        loginPage.login(mail,password);
+        extentTest.log(Status.INFO, "Logueado ok");
+        customerPage= homePage.clickInMyAccount();
+        extentTest.log(Status.INFO, "Clickeo en MyAccount");
+        changePasswordPage= customerPage.goToChangePassword();
+        extentTest.log(Status.INFO, "Llego a sección My account - Customer info");
+        extentTest.log(Status.INFO, "Clickeo en ChangePassword y paso a completar datos");
+        extentTest.log(Status.INFO, "OldPassWord: " + password +"  newPassWord: "+passwordNuevo+"  confirmNewPassWord: " + confirmarPasswordNuevo);
+        changePasswordPage.changePasswordOk(password,passwordNuevo,confirmarPasswordNuevo);
+
+        if(changePasswordPage.newPassDistinctConfirmPass()){
+
+            extentTest.log(Status.INFO, "Falla:nueva pass y confirmar nueva password no son iguales");
+        }
+
+        if(changePasswordPage.newPassIgualOldPass())
+        {
+            extentTest.log(Status.INFO, "Falla: newPassWord ingresado distinta es igual a OldPassword");
+        }
+
+        SA.assertTrue(changePasswordPage.txtPasswordChangedOkIsDisplayed());
+        extentTest.log(Status.INFO, "Se cambio la contraseña correctamente");
+
+        homePage.clickInlogout();
+
+        extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP7ExtraCambioDeMail");
+
+    }
+
+
+
 }// Fin clase

@@ -5,11 +5,9 @@
 
     <parameter name="valid_user" value="mail_00@mail.com"/>
     <parameter name="valid_password" value="pass00"/>
-
     <parameter name="browser" value="chrome"/>
 
      <test name="testPages">
-
          <classes>
              <class name = "TestNopcommerce">
                  <methods>
@@ -18,7 +16,8 @@
                      <exclude name="testCP4agregarAWishList"/>
                      <exclude name="testCP3CheckoutConTarjeta"/>
                      <exclude name="testCP5CompararProductos"/>
-                     <include name="testCP6ExtraRegistroConMailExistente"/>
+                     <exclude name="testCP6ExtraRegistroConMailExistente"/>
+                     <include name="testCP7ExtraCambioDeMail"/>
                    </methods>
                </class>
            </classes>
