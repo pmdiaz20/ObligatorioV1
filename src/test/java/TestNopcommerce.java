@@ -267,4 +267,39 @@ public class TestNopcommerce extends BaseTest{
 
 
 
+
+
+    @Test(dataProvider = "UserOkWithProductToSendFriend", dataProviderClass = DataProviderClass.class)
+    public void testCP8ExtraEmailAFriend(String valid_user, String valid_password, String productToSearchAndSend,String emailFriend, Method method) {
+        extentTest = extentReports.createTest(method.getName());
+        loginPage = homePage.clickInLogIn();
+        loginPage.login(valid_user, valid_password);
+        extentTest.log(Status.INFO, "Login Ok para correr testCP8ExtraEmailAFriend");
+        resultsPage = homePage.searchProduct(productToSearchAndSend);
+        extentTest.log(Status.INFO, "Buscando articulo " + productToSearchAndSend);
+
+        infoProductPage = resultsPage.verDetalle(productToSearchAndSend);
+
+        extentTest.log(Status.INFO, "Llego a infoProductPage para ver detalle de " + productToSearchAndSend);
+
+        productEmailAFriendPage = infoProductPage.sendProduct();
+        extentTest.log(Status.INFO, "Llego a la pagina de envio de mail");
+
+
+        productEmailAFriendPage.sendEmail(productToSearchAndSend,emailFriend);
+        extentTest.log(Status.INFO, "Completo mail de amigo y le envio el producto");
+        SA.assertTrue(productEmailAFriendPage.msgSendOK());
+
+        homePage.clickInlogout();
+
+        extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP8ExtraEmailAFriend");
+
+
+
+
+
+    }
+
+
+
 }// Fin clase

@@ -26,4 +26,6 @@ public class ProductItem {
     public void addToCompare() {
         element.findElement(By.cssSelector("input[value='Add to compare list']")).click();
     }
+
+
 }

@@ -66,23 +66,6 @@ public class ResultsPage extends BasePage {
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//p[@class='content']")));
 
 
-            /*
-            if(product.getName().contains(producto))
-            {
-                if (contador < 3)
-                {
-                    product.addToCompare();
-                    contador = (contador + 1 );
-                }
-                else
-                {
-                    break;
-                }
-
-            }
-            // encontrado = true;
-*/
-
         }
     }
     public void addToWishList(String object){
@@ -94,6 +77,21 @@ public class ResultsPage extends BasePage {
             }
         }
     }
+
+    public InfoProductPage verDetalle(String object){
+        for (ProductItem product : resultados){
+            if (product.getName().equals(object)){
+
+                driver.findElement(By.xpath("//div[@class='picture']//a//img")).click();
+
+
+            }
+
+        }
+        return new InfoProductPage(driver);
+    }
+
+
 
     public boolean productAddedToWishList(String product){
         if(!encontrado) {

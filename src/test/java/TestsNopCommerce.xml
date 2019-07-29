@@ -17,7 +17,8 @@
                      <exclude name="testCP3CheckoutConTarjeta"/>
                      <exclude name="testCP5CompararProductos"/>
                      <exclude name="testCP6ExtraRegistroConMailExistente"/>
-                     <include name="testCP7ExtraCambioDeMail"/>
+                     <exclude name="testCP7ExtraCambioDeMail"/>
+                     <include name="testCP8ExtraEmailAFriend"/>
                    </methods>
                </class>
            </classes>
