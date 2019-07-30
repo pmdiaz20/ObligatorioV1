@@ -6,6 +6,7 @@
     <parameter name="valid_user" value="mail_00@mail.com"/>
     <parameter name="valid_password" value="pass00"/>
     <parameter name="browser" value="chrome"/>
+    <parameter name="currency" value="Euro"/>  <!-- Aca puede ir Euro o US Dollar -->
 
      <test name="testPages">
          <classes>
@@ -18,7 +19,8 @@
                      <exclude name="testCP5CompararProductos"/>
                      <exclude name="testCP6ExtraRegistroConMailExistente"/>
                      <exclude name="testCP7ExtraCambioDeMail"/>
-                     <include name="testCP8ExtraEmailAFriend"/>
+                     <exclude name="testCP8ExtraEmailAFriend"/>
+                     <include name="testCP9ExtracambioMonedaParameters"/>
                    </methods>
                </class>
            </classes>

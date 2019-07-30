@@ -1,5 +1,6 @@
 import com.aventstack.extentreports.Status;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import utils.DataProviderClass;
 
@@ -295,9 +296,22 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP8ExtraEmailAFriend");
 
 
+    }
+
+
+    @Parameters("currency")
+    @Test
+    public void testCP9ExtracambioMonedaParameters(String moneda, Method method){
+        extentTest = extentReports.createTest(method.getName());
+        extentTest.log(Status.INFO, "Busco producto y luego cambio a tipo de moneda "+moneda);
 
 
 
+        resultsPage = homePage.searchProduct("Nokia Lumia 1020");
+
+        homePage.seleccionarMoneda(moneda);
+        System.out.println(homePage.checkChangeCurrency(moneda));
+        Assert.assertTrue(homePage.checkChangeCurrency(moneda));
     }
 
 

@@ -27,5 +27,10 @@ public class ProductItem {
         element.findElement(By.cssSelector("input[value='Add to compare list']")).click();
     }
 
+    //    //span[@class='price actual-price']
+
+    public String getPrice(){
+        return element.findElement(By.className("prices")).getText();
+    }
 
 }

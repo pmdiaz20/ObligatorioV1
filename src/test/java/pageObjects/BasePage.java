@@ -48,6 +48,10 @@ public class BasePage {
 
     public HomePage clickInlogout() { return bar.logout();}
 
+    public void seleccionarMoneda(String moneda){
+        bar.seleccionarMoneda(moneda);
+    }
+
 
 }
 

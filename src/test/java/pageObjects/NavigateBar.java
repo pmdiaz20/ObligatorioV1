@@ -39,12 +39,15 @@ public class NavigateBar  {
     @FindBy(how = How.XPATH, using ="//a[@class='ico-logout']")
     WebElement btnLogout;
 
+    CurrencyPage currencyMenu;
+
 
 
     public NavigateBar(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 10);
         PageFactory.initElements(driver, this);
+        currencyMenu = new CurrencyPage(driver);
     }
 
     public LoginPage clickInLogIn(){
@@ -97,5 +100,9 @@ public class NavigateBar  {
         btnLogout.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ico-register']")));
         return new HomePage(driver);
+    }
+
+    public void seleccionarMoneda(String moneda){
+        currencyMenu.seleccionarMoneda(moneda);
     }
 }

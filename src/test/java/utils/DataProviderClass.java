@@ -75,7 +75,7 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProviderUserOkWithProductToSendFriend(){
         return new Object[][]
                 {
-                        {"mail_00@mail.com", "pass00","HTC One M8 Android L 5.0 Lollipop","mailamigo@mail.com"}
+                        {"mail_00@mail.com", "pass00","Nokia Lumia 1020","mailamigo@mail.com"}
                 };
 
     }
