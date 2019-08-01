@@ -17,6 +17,16 @@ public class BasePage {
     protected static ExtentReports extentReports;
     protected static ExtentTest extentTest;
 
+    protected static String productName;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
     public BasePage(WebDriver driver){
         this.driver = driver;
         wait = new WebDriverWait(driver,10);
@@ -47,6 +57,11 @@ public class BasePage {
     }
 
     public HomePage clickInlogout() { return bar.logout();}
+
+    public ResultsPage gotoBooks()
+    {
+        return bar.goToBooks();
+    }
 
     public void seleccionarMoneda(String moneda){
         bar.seleccionarMoneda(moneda);

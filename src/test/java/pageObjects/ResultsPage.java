@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +24,10 @@ public class ResultsPage extends BasePage {
 
     @FindBy(how = How.XPATH, using ="//a[contains(text(),'Compare products list')]")
     WebElement compareListLinkText;
+
+
+    @FindBy(how = How.XPATH, using ="//select[@id='products-orderby']")
+    WebElement selectSortBy;
 
     public CompareProductsPage clickInCompareList()
     {
@@ -105,6 +110,24 @@ public class ResultsPage extends BasePage {
         }
     }
 
+    public void sortByPriceLowToHigh()
+    {
+        Select ordernarPor = new Select(selectSortBy);
+        ordernarPor.selectByVisibleText("Price: Low to High");
+
+    }
+
+    public void agregarAlCarritoMenorPrecio() {
+        int indice = -1;
+        double menorPrecio = 999999.00;
+        for(int i = 0; i < resultados.size(); i++){
+
+            resultados.get(0).addToCart();
+            break;
+        }
+     //   setProductName(resultados.get(indice).getName());
+       // resultados.get(indice).addToCart();
+    }
 /*
     public void addToCart(String object){
         for(ProductItem product : resultados){

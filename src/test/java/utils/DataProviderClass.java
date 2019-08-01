@@ -19,7 +19,7 @@ public class DataProviderClass {
 
         return new Object[][]
                 {
-                        {"ba22azssc_1@mail.com", "pass00","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
+                        {"ba22azssc_1@mail.com", "pass06","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
                                 "Avenida Italia 1221","Avenida Italia 1222 Bis","12400","26095815","26095817"}
                 };
 

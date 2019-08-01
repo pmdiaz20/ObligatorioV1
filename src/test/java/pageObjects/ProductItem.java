@@ -7,6 +7,7 @@ public class ProductItem {
 
     WebElement element;
 
+
     public String getName(){
         return element.findElement(By.tagName("h2")).getText();
     }
@@ -20,7 +21,10 @@ public class ProductItem {
     }
 
     public void addToCart(){
-        element.findElement(By.className("fa-shopping-cart")).click();
+        //element.findElement(By.className("fa-shopping-cart")).click(); //modificado 31/7
+
+
+        element.findElement(By.cssSelector("input[value='Add to cart']")).click();
     }
 
     public void addToCompare() {
@@ -32,5 +36,10 @@ public class ProductItem {
     public String getPrice(){
         return element.findElement(By.className("prices")).getText();
     }
+/*
+    public double getValor() {
+        String precio = element.findElement(By.className("prices")).getText().substring(1, element.findElement(By.className("prices")).getText().
+        return Double.valueOf(precio);
+    }*/
 
 }

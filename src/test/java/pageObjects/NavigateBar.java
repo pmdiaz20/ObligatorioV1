@@ -41,6 +41,9 @@ public class NavigateBar  {
 
     CurrencyPage currencyMenu;
 
+    @FindBy(how = How.XPATH,using ="//ul[@class='top-menu notmobile']//a[contains(text(),'Books')]")
+    WebElement books;
+
 
 
     public NavigateBar(WebDriver driver) {
@@ -100,6 +103,12 @@ public class NavigateBar  {
         btnLogout.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ico-register']")));
         return new HomePage(driver);
+    }
+
+    public ResultsPage goToBooks(){
+        books.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Books')]")));
+        return new ResultsPage(driver);
     }
 
     public void seleccionarMoneda(String moneda){

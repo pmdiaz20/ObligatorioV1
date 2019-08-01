@@ -315,5 +315,44 @@ public class TestNopcommerce extends BaseTest{
     }
 
 
+    @Test
+    public void testCP10ExtraAgregarLibroMasEconomicoACarrito(Method method){
+        extentTest = extentReports.createTest(method.getName());
+        extentTest.log(Status.INFO, "Voy a la seccion libros");
+
+        resultsPage = homePage.gotoBooks();
+
+        resultsPage.sortByPriceLowToHigh();
+        SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+
+        resultsPage.agregarAlCarritoMenorPrecio();
+        //resultsPage.addProductToShoppingCart();
+    }
+
+    @Test void testCP10ExtraVaciarCarrito(Method method){
+        extentTest = extentReports.createTest(method.getName());
+
+        String productToSearch = "Asus N551JK-XO076H Laptop";
+       // loginPage = homePage.clickInLogIn();
+        //loginPage.login(valid_user,valid_password);
+        resultsPage= homePage.searchProduct(productToSearch);
+        extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
+        SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+        resultsPage.addProductToShoppingCart();
+        driver.navigate().refresh();
+        extentTest.log(Status.INFO, "Agregando articulo " + productToSearch + "al carrito");
+        shoppingCartPage = homePage.clickInShoppingCart();
+        extentTest.log(Status.INFO, "Voy al carrito" );
+        SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
+
+        shoppingCartPage.delete();
+        extentTest.log(Status.INFO, "Elimino producto");
+
+        SA.assertTrue(shoppingCartPage.emptyCart());
+        extentTest.log(Status.INFO, "Chequeo que carrito no tenga productos");
+
+
+    }
+
 
 }// Fin clase

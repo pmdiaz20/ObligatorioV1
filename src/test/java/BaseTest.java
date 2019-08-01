@@ -37,6 +37,8 @@ public class BaseTest {
     protected ChangePasswordPage changePasswordPage;
     protected InfoProductPage infoProductPage;
     protected ProductEmailAFriendPage productEmailAFriendPage;
+    protected ProductCart productCart;
+    protected ProductCartList productCartList;
 
 
     protected static ExtentHtmlReporter extentHtmlReporter;
