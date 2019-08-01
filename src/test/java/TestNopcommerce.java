@@ -71,6 +71,8 @@ public class TestNopcommerce extends BaseTest{
         resultsPage.addProductToShoppingCart();
         extentTest.log(Status.INFO, "agrego articulo " + productToSearch + " al carrito");
 
+        driver.navigate().refresh();
+
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito");
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
@@ -107,10 +109,8 @@ public class TestNopcommerce extends BaseTest{
 
         resultsPage.addProductToShoppingCart();
         extentTest.log(Status.INFO, "Agregando articulo " + productToSearch + "al carrito");
+        driver.navigate().refresh();
 
-        extentTest.log(Status.INFO, "intento ir hasta arriba" );
-
-        extentTest.log(Status.INFO, "fue hasta arriba" );
 
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito" );
@@ -184,6 +184,8 @@ public class TestNopcommerce extends BaseTest{
 
         driver.navigate().refresh();
 
+
+        homePage.clickInlogout();
         // FALTA TERMINAR
     }
 
@@ -229,53 +231,14 @@ public class TestNopcommerce extends BaseTest{
     }
 
 
-
-    @Test(dataProvider = "UserOkT0ChangePassword",dataProviderClass = DataProviderClass.class)
-    public void testCP7ExtraCambioDeMail(String mail,String password,String passwordNuevo,
-                                                     String confirmarPasswordNuevo,Method method) {
-
+    @Test(dataProvider = "UserOkWithProductToSendFriend", dataProviderClass = DataProviderClass.class)
+    public void testCP7ExtraEmailAFriend(String mail,String password,String productToSearchAndSend,String emailFriend, Method method) {
         extentTest = extentReports.createTest(method.getName());
 
         loginPage = homePage.clickInLogIn();
         loginPage.login(mail,password);
-        extentTest.log(Status.INFO, "Logueado ok");
-        customerPage= homePage.clickInMyAccount();
-        extentTest.log(Status.INFO, "Clickeo en MyAccount");
-        changePasswordPage= customerPage.goToChangePassword();
-        extentTest.log(Status.INFO, "Llego a sección My account - Customer info");
-        extentTest.log(Status.INFO, "Clickeo en ChangePassword y paso a completar datos");
-        extentTest.log(Status.INFO, "OldPassWord: " + password +"  newPassWord: "+passwordNuevo+"  confirmNewPassWord: " + confirmarPasswordNuevo);
-        changePasswordPage.changePasswordOk(password,passwordNuevo,confirmarPasswordNuevo);
+        extentTest.log(Status.INFO, "Logueado Ok para correr testCP7ExtraEmailAFriend");
 
-        if(changePasswordPage.newPassDistinctConfirmPass()){
-
-            extentTest.log(Status.INFO, "Falla:nueva pass y confirmar nueva password no son iguales");
-        }
-
-        if(changePasswordPage.newPassIgualOldPass())
-        {
-            extentTest.log(Status.INFO, "Falla: newPassWord ingresado distinta es igual a OldPassword");
-        }
-
-        SA.assertTrue(changePasswordPage.txtPasswordChangedOkIsDisplayed());
-        extentTest.log(Status.INFO, "Se cambio la contraseña correctamente");
-
-        homePage.clickInlogout();
-
-        extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP7ExtraCambioDeMail");
-
-    }
-
-
-
-
-
-    @Test(dataProvider = "UserOkWithProductToSendFriend", dataProviderClass = DataProviderClass.class)
-    public void testCP8ExtraEmailAFriend(String valid_user, String valid_password, String productToSearchAndSend,String emailFriend, Method method) {
-        extentTest = extentReports.createTest(method.getName());
-        loginPage = homePage.clickInLogIn();
-        loginPage.login(valid_user, valid_password);
-        extentTest.log(Status.INFO, "Login Ok para correr testCP8ExtraEmailAFriend");
         resultsPage = homePage.searchProduct(productToSearchAndSend);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearchAndSend);
 
@@ -295,6 +258,36 @@ public class TestNopcommerce extends BaseTest{
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP8ExtraEmailAFriend");
 
+
+    }
+
+
+    @Test(dataProvider = "UserOkT0ChangePassword",dataProviderClass = DataProviderClass.class)
+    public void testCP8ExtraCambioDePassowrd(String mail,String password,String passwordNuevo,
+                                                     String confirmarPasswordNuevo,Method method) {
+
+        extentTest = extentReports.createTest(method.getName());
+
+        loginPage = homePage.clickInLogIn();
+        loginPage.login(mail,password);
+        extentTest.log(Status.INFO, "Logueado ok");
+        customerPage= homePage.clickInMyAccount();
+        extentTest.log(Status.INFO, "Clickeo en MyAccount");
+        changePasswordPage= customerPage.goToChangePassword();
+        extentTest.log(Status.INFO, "Llego a sección My account - Customer info");
+        extentTest.log(Status.INFO, "Clickeo en ChangePassword y paso a completar datos");
+        extentTest.log(Status.INFO, "OldPassWord: " + password +"  newPassWord: "+passwordNuevo+"  confirmNewPassWord: " + confirmarPasswordNuevo);
+        changePasswordPage.changePasswordOk(password,passwordNuevo,confirmarPasswordNuevo);
+
+
+        SA.assertTrue(changePasswordPage.txtPasswordChangedOkIsDisplayed());
+        extentTest.log(Status.INFO, "Se cambio la contraseña correctamente");
+        extentTest.log(Status.INFO, "La nueva password del mail "+mail+" es "+passwordNuevo);
+
+
+        homePage.clickInlogout();
+
+        extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP7ExtraCambioDeMail");
 
     }
 
@@ -329,7 +322,7 @@ public class TestNopcommerce extends BaseTest{
         //resultsPage.addProductToShoppingCart();
     }
 
-    @Test void testCP10ExtraVaciarCarrito(Method method){
+    @Test void testCP10ExtraAgregarACarritoyLuegoEliminarlo(Method method){
         extentTest = extentReports.createTest(method.getName());
 
         String productToSearch = "Asus N551JK-XO076H Laptop";

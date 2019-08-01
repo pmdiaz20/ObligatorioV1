@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class ProductEmailAFriendPage extends BasePage {
     public ProductEmailAFriendPage(WebDriver driver) {
@@ -13,6 +14,9 @@ public class ProductEmailAFriendPage extends BasePage {
 
     @FindBy(how = How.XPATH, using = "//input[@id='FriendEmail']")
     WebElement inputFriendEmail;
+
+    @FindBy(how = How.XPATH, using ="//input[@id='YourEmailAddress']")
+    WebElement inputMyEmail;
 
     @FindBy(how = How.XPATH, using = "//textarea[@id='PersonalMessage']")
     WebElement boxMensajePersonal;
@@ -27,6 +31,7 @@ public class ProductEmailAFriendPage extends BasePage {
         boxMensajePersonal.click();
         boxMensajePersonal.sendKeys("Please check this product:  "+productToSearchAndSend);
         btnSendEmail.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[contains(text(),'Your message has been sent')]"))).isDisplayed();
 
     }
 

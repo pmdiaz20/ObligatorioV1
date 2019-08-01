@@ -9,7 +9,7 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProvider(){
         return new Object[][]
                 {
-                        {"M","Juan","Perez","11","September","1980","ba22azssc_1@mail.com","Empresa SA","YES","pass00","pass00"}
+                        {"M","Juan","Perez","11","September","1980","mailtest0002@mail.com","Empresa SA","YES","pass00","pass00"}
                 };
     }
 
@@ -19,7 +19,7 @@ public class DataProviderClass {
 
         return new Object[][]
                 {
-                        {"ba22azssc_1@mail.com", "pass06","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
+                        {"mailtest0002@mail.com", "pass00","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
                                 "Avenida Italia 1221","Avenida Italia 1222 Bis","12400","26095815","26095817"}
                 };
 
@@ -30,7 +30,7 @@ public class DataProviderClass {
 
         return new Object[][]
                 {
-                        {"ba22azssc_1@mail.com", "pass00","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
+                        {"mailtest0002@mail.com", "pass00","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
                                 "Avenida Italia 1221","Avenida Italia 1222 Bis","12400","26095815","26095817",
                         "MasterCard","Juan Arturo Sosa","5197136294124627","11","2020","336"}
                 };
@@ -42,11 +42,11 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProviderUserOkWithProductToWishList(){
         return new Object[][]
                 {
-                        {"ba22azssc_1@mail.com", "pass00","HTC One M8 Android L 5.0 Lollipop"},
-                        {"ba22azssc_1@mail.com", "pass00","Asus N551JK-XO076H Laptop"},
-                        {"ba22azssc_1@mail.com", "pass00","Fahrenheit 451 by Ray Bradbury"},
-                        {"ba22azssc_1@mail.com", "pass00","Nokia Lumia 1020"},
-                        {"ba22azssc_1@mail.com", "pass00","Flower Girl Bracelet"}
+                        {"mailtest0002@mail.com", "pass00","HTC One M8 Android L 5.0 Lollipop"},
+                        {"mailtest0002@mail.com", "pass00","Asus N551JK-XO076H Laptop"},
+                        {"mailtest0002@mail.com", "pass00","Fahrenheit 451 by Ray Bradbury"},
+                        {"mailtest0002@mail.com", "pass00","Nokia Lumia 1020"},
+                        {"mailtest0002@mail.com", "pass00","Flower Girl Bracelet"}
                 };
 
     }
@@ -56,7 +56,7 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProviderUserOkWithProductsToCompare(){
         return new Object[][]
                 {
-                        {"ba22azssc_1@mail.com", "pass00","HTC"}
+                        {"mailtest0002@mail.com", "pass00","HTC"}
                 };
     }
 
@@ -65,7 +65,7 @@ public class DataProviderClass {
         return new Object[][]
                 {        //mail                ,oldpasword, newpassword, confirmNewPassword
 
-                        {"ba22azssc_1@mail.com", "pass06","pass06","pass07"}
+                        {"mailtest0002@mail.com", "pass00","pass01","pass01"}
                 };
     }
 
@@ -75,7 +75,7 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProviderUserOkWithProductToSendFriend(){
         return new Object[][]
                 {
-                        {"mail_00@mail.com", "pass00","Nokia Lumia 1020","mailamigo@mail.com"}
+                        {"mail_00@mail.com","pass00","Nokia Lumia 1020","mailamigo@mail.com"}
                 };
 
     }
