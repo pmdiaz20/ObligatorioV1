@@ -128,6 +128,10 @@ public class ResultsPage extends BasePage {
      //   setProductName(resultados.get(indice).getName());
        // resultados.get(indice).addToCart();
     }
+
+    public Boolean productoLocalizado (String product){
+        return driver.findElement(By.xpath("//h2[@class='product-title']//a[contains(text(),'"+product+"')]")).isDisplayed();
+    }
 /*
     public void addToCart(String object){
         for(ProductItem product : resultados){

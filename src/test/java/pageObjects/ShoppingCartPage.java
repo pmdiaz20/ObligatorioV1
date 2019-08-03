@@ -67,4 +67,8 @@ public class ShoppingCartPage extends BasePage {
         return driver.findElement(By.xpath("//div[@class='no-data']")).isDisplayed();
     }
 
+    public Boolean btnCheckoutIsDisplayed(){
+        return driver.findElement(By.xpath("//button[@id='checkout']")).isDisplayed();
+    }
+
 }

@@ -34,17 +34,17 @@ public class TestNopcommerce extends BaseTest{
         SA.assertTrue(registerPage.dropDayBirthIsDisplayed());
         SA.assertTrue(registerPage.dropMonthBirthIsDisplayed());
         SA.assertTrue(registerPage.dropYearBirthIsDisplayed());
-
+        extentTest.log(Status.INFO, "Chequeo que esten todos los campos displayed");
         extentTest.log(Status.INFO, "Procedo a completar los datos de registro");
-
         registerResultPage = registerPage.registerOK(gender,firstname,lastname,dayBirth,monthBirth,yearBirth,
                  email,company,newsletter,password,confirmpassword);
         extentTest.log(Status.INFO, "complete todos los datos de registro");
 
         SA.assertTrue((registerResultPage.txtOKRegisterIsDisplayed()));
+        extentTest.log(Status.INFO, "Se muestra texto: Your registration completed");
 
         registerResultPage.clickContinuarInRegisterPageOK();
-        extentTest.log(Status.INFO, "Clickeo en continuar luego de registro OK");
+        extentTest.log(Status.INFO, "Click en continuar luego de registro OK");
 
         homePage.clickInlogout();
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP1RegistrarUsuario");
@@ -65,25 +65,41 @@ public class TestNopcommerce extends BaseTest{
 
         resultsPage= homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
+        SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
+        extentTest.log(Status.INFO, "Valido que encuentra producto");
+        System.out.println("resultsPage.productoLocalizado(productToSearch): " + resultsPage.productoLocalizado(productToSearch));
 
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que aparece boton AddToCart");
+        System.out.println("resultsPage.btnAddToCartIsDisplayed(): "+ resultsPage.btnAddToCartIsDisplayed());
 
         resultsPage.addProductToShoppingCart();
-        extentTest.log(Status.INFO, "agrego articulo " + productToSearch + " al carrito");
-
+        extentTest.log(Status.INFO, "Agrego articulo " + productToSearch + " al carrito");
         driver.navigate().refresh();
 
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito");
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
+        System.out.println("shoppingCartPage.productIsInShoppingCart(productToSearch): "+shoppingCartPage.productIsInShoppingCart(productToSearch));
         extentTest.log(Status.INFO, "Valido que el producto "+ productToSearch + " esté en el carrito");
 
+        SA.assertTrue(shoppingCartPage.btnCheckoutIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que aparezca el boton checkout");
         checkoutPage= shoppingCartPage.clickInCheckout();
         extentTest.log(Status.INFO, "Clickeo en Checkout");
 
         checkoutCompletePage= checkoutPage.realizarCheckoutConEfectivo(pais,ciudad,direccion1,direccion2,codigoPostal,telefono,fax);
-        SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
         extentTest.log(Status.INFO, "Completé los datos para el checkout");
+        SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
+        System.out.println("checkoutCompletePage.txtOrderOkIsDisplayed(): "+ checkoutCompletePage.txtOrderOkIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestra texto: Your order has been successfully processed!'");
+
+        extentTest.log(Status.INFO, checkoutCompletePage.txtOrderNumber());
+        checkoutCompletePage.txtOrderNumber();
+
+        SA.assertTrue(checkoutCompletePage.btnFinalizerOrderIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestra boton de finalizar orden");
+        System.out.println("checkoutCompletePage.btnFinalizerOrderIsDisplayed(): "+ checkoutCompletePage.btnFinalizerOrderIsDisplayed());
         checkoutCompletePage.finalizeOrder();
         extentTest.log(Status.INFO, "Finalizo orden");
         homePage.clickInlogout();

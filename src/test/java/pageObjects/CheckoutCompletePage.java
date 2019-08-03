@@ -27,4 +27,19 @@ public class CheckoutCompletePage extends BasePage {
 
         return driver.findElement(By.xpath("//strong[contains(text(),'Your order has been successfully processed!')]")).isDisplayed();
     }
+
+    public Boolean btnFinalizerOrderIsDisplayed()
+    {
+        return driver.findElement(By.xpath("//input[@class='button-1 order-completed-continue-button']")).isDisplayed();
+    }
+
+    public String txtOrderNumber(){
+
+        String orden = driver.findElement(By.xpath("//*[@class='order-number']")).getText();
+        System.out.println(orden);
+        return orden;
+    }
+
+
+
 }

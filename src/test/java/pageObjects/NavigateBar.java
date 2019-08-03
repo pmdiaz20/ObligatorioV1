@@ -114,4 +114,7 @@ public class NavigateBar  {
     public void seleccionarMoneda(String moneda){
         currencyMenu.seleccionarMoneda(moneda);
     }
+
+
+
 }
