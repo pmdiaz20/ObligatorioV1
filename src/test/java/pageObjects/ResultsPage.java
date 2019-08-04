@@ -58,6 +58,11 @@ public class ResultsPage extends BasePage {
         return driver.findElement(By.xpath("//input[@class='button-2 product-box-add-to-cart-button']")).isDisplayed();
     }
 
+    public Boolean btnAddToWishListIsDisplayed() {
+
+        return driver.findElement(By.xpath("//input[@class='button-2 add-to-wishlist-button']")).isDisplayed();
+    }
+
     public void addToCompareList(String producto){
         int contador=1;
         for (ProductItem product : resultados){

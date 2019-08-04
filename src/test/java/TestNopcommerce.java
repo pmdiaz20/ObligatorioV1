@@ -166,6 +166,10 @@ public class TestNopcommerce extends BaseTest{
         SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
         extentTest.log(Status.INFO,"Valido que encuentra el producto "+ productToSearch);
 
+        SA.assertTrue(resultsPage.btnAddToWishListIsDisplayed());
+        extentTest.log(Status.INFO,"Valido que esta btn de agregar a Wishlist");
+
+
         resultsPage.addToWishList(productToSearch);
         extentTest.log(Status.INFO, "Agrego " + productToSearch + " a la Wishlist");
         SA.assertTrue(resultsPage.productAddedToWishList(productToSearch));
@@ -179,9 +183,6 @@ public class TestNopcommerce extends BaseTest{
 
         homePage.clickInlogout();
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP4agregarAWishList");
-
-
-
 
     }
 
