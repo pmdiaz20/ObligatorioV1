@@ -81,6 +81,7 @@ public class ResultsPage extends BasePage {
                 break;
             }
         }
+
     }
 
     public InfoProductPage verDetalle(String object){

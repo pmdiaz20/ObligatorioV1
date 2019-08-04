@@ -30,7 +30,7 @@ public class DataProviderClass {
 
         return new Object[][]
                 {
-                        {"mailtest0002@mail.com", "pass00","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
+                        {"mail_00@mail.com", "pass00","Asus N551JK-XO076H Laptop","Uruguay","Montevideo",
                                 "Avenida Italia 1221","Avenida Italia 1222 Bis","12400","26095815","26095817",
                         "MasterCard","Juan Arturo Sosa","5197136294124627","11","2020","336"}
                 };
@@ -42,11 +42,11 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProviderUserOkWithProductToWishList(){
         return new Object[][]
                 {
-                        {"mailtest0002@mail.com", "pass00","HTC One M8 Android L 5.0 Lollipop"},
-                        {"mailtest0002@mail.com", "pass00","Asus N551JK-XO076H Laptop"},
-                        {"mailtest0002@mail.com", "pass00","Fahrenheit 451 by Ray Bradbury"},
-                        {"mailtest0002@mail.com", "pass00","Nokia Lumia 1020"},
-                        {"mailtest0002@mail.com", "pass00","Flower Girl Bracelet"}
+                        {"mail_00@mail.com", "pass00","HTC One M8 Android L 5.0 Lollipop"},
+                        {"mail_00@mail.com", "pass00","Asus N551JK-XO076H Laptop"},
+                        {"mail_00@mail.com", "pass00","Fahrenheit 451 by Ray Bradbury"},
+                        {"mail_00@mail.com", "pass00","Nokia Lumia 1020"},
+                        {"mail_00@mail.com", "pass00","Flower Girl Bracelet"}
                 };
 
     }
@@ -56,7 +56,7 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProviderUserOkWithProductsToCompare(){
         return new Object[][]
                 {
-                        {"mailtest0002@mail.com", "pass00","HTC"}
+                        {"mail_00@mail.com", "pass00","HTC"}
                 };
     }
 

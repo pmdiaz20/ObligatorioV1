@@ -20,10 +20,19 @@ public class WishListPage extends BasePage {
         }
     }
 
-    public boolean chequearSiEstaEnWishlist(String object) {
+    public boolean chequearSiEstaProductoEnWishlist(String nombreProducto) {
         for(WishListProduct p : productos){
-            if(p.getName().equals(object))
+            if(p.getName().equals(nombreProducto))
                 return true;
         }
         return false;
-    }}
+    }
+
+    public Boolean chequearSiEstoyEnWishListPage(){
+        return driver.findElement(By.xpath("//h1[contains(text(),'Wishlist')]")).isDisplayed();
+    }
+
+
+
+
+}

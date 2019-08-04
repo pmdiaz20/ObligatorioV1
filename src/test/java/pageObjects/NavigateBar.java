@@ -90,6 +90,15 @@ public class NavigateBar  {
 
     }
 
+    public WishListPage clickInWishList(){
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,1000)");
+        headerbtnWhisList.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Wishlist')]")));
+        return new WishListPage(driver);
+    }
+
     public ResultsPage searchProduct(String product){
         searchBox.sendKeys(product);
         btnSearch.click();

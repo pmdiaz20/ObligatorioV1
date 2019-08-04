@@ -121,63 +121,67 @@ public class TestNopcommerce extends BaseTest{
         loginPage.login(valid_user,valid_password);
         resultsPage= homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
+        SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
+        extentTest.log(Status.INFO,"Valido que encuentra el producto "+ productToSearch);
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
-
+        extentTest.log(Status.INFO, "Valido que se muestra boton AddToCart");
         resultsPage.addProductToShoppingCart();
-        extentTest.log(Status.INFO, "Agregando articulo " + productToSearch + "al carrito");
+        extentTest.log(Status.INFO, "Agrego articulo " + productToSearch + "al carrito");
         driver.navigate().refresh();
-
-
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito" );
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
-
+        extentTest.log(Status.INFO, "Valido que el producto "+ productToSearch + " esté en el carrito");
+        SA.assertTrue(shoppingCartPage.btnCheckoutIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que aparezca el boton checkout");
         checkoutPage= shoppingCartPage.clickInCheckout();
         extentTest.log(Status.INFO, "Clickeo en checkout");
         checkoutCompletePage = checkoutPage.realizarCheckoutConTarjeta(pais,ciudad,direccion1,direccion2,codigoPostal,
                 telefono,fax,marcaTarjeta,titularTarjeta, numeroTarjeta, expiracionMes,expriacionAnio, codigoSeguridad);
         extentTest.log(Status.INFO, "Completo ok los datos");
-
         SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que texto 'Your order has been successfully processed!' sea visible");
+        extentTest.log(Status.INFO, checkoutCompletePage.txtOrderNumber());
+        SA.assertTrue(checkoutCompletePage.btnFinalizerOrderIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestra boton de finalizar orden");
 
-        checkoutCompletePage.finalizeOrder();
+        checkoutCompletePage.finalizeOrder();extentTest.log(Status.INFO, "Finalizo orden");
         homePage.clickInlogout();
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP3CheckoutConTarjeta");
 
     }
 
-//usar data provider
+
     @Test(dataProvider = "UserOkWithProductToWishList", dataProviderClass = DataProviderClass.class)
     public void testCP4agregarAWishList(String valid_user, String valid_password, String productToSearch, Method method) {
         extentTest = extentReports.createTest(method.getName());
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
         extentTest.log(Status.INFO, "Login Ok para correr testCP4agregarAWishList");
+
         resultsPage = homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
 
+        SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
+        extentTest.log(Status.INFO,"Valido que encuentra el producto "+ productToSearch);
+
         resultsPage.addToWishList(productToSearch);
-
         extentTest.log(Status.INFO, "Agrego " + productToSearch + " a la Wishlist");
+        SA.assertTrue(resultsPage.productAddedToWishList(productToSearch));
+        extentTest.log(Status.INFO, "Valido que aparezca texto de que se agrega ok " + productToSearch + " a la Wishlist");driver.navigate().refresh();
 
-        Assert.assertTrue(resultsPage.productAddedToWishList(productToSearch));
-
-        extentTest.log(Status.INFO, "Se agrega ok " + productToSearch + " a la Wishlist");
-
-        driver.navigate().refresh();
-
-        extentTest.log(Status.INFO, "refresco pagina");
-      //  wishListPage = searchPage.goToWishList();
-      //  Assert.assertTrue(wishListPage.verifyIfAt(productToSearch));
-
+        wishListPage = homePage.clickInWishList();extentTest.log(Status.INFO, "Voy a Wishlist");
+        SA.assertTrue(wishListPage.chequearSiEstoyEnWishListPage());
+        extentTest.log(Status.INFO, "Valido que llegue a WishlistPage");
+        SA.assertTrue(wishListPage.chequearSiEstaProductoEnWishlist(productToSearch));
+        extentTest.log(Status.INFO, "Valido que "+productToSearch+" se encuentre en wishlist");
 
         homePage.clickInlogout();
-
-        extentTest.log(Status.INFO, "Click en logout");
-
-
         extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP4agregarAWishList");
+
+
+
 
     }
 

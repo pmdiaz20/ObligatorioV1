@@ -13,9 +13,9 @@
              <class name = "TestNopcommerce">
                  <methods>
                      <exclude name="testCP1RegistrarUsuario"/>
-                     <include name="testCP2CheckoutConEfectivo"/>
+                     <exclude name="testCP2CheckoutConEfectivo"/>
                      <exclude name="testCP3CheckoutConTarjeta"/>
-                     <exclude name="testCP4agregarAWishList"/>
+                     <include name="testCP4agregarAWishList"/>
                      <exclude name="testCP5CompararProductos"/>
                      <exclude name="testCP6ExtraRegistroConMailExistente"/>
                      <exclude name="testCP7ExtraEmailAFriend"/>

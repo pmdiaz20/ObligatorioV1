@@ -52,6 +52,10 @@ public class BasePage {
         return bar.clickInShoppingCart();
     }
 
+    public WishListPage clickInWishList(){
+        return bar.clickInWishList();
+    }
+
     public ResultsPage searchProduct(String productToSearch){
         return bar.searchProduct(productToSearch);
     }
