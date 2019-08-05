@@ -34,4 +34,6 @@ public class CurrencyPage {
 
         System.out.println("seleccione moneda: "+moneda);
     }
+
+
 }

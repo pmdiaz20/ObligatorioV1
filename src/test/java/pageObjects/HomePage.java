@@ -48,5 +48,15 @@ public class HomePage extends BasePage {
     }
 
 
+    public Boolean btnMyAccountIsDisplayed()
+    {
+        return driver.findElement(By.xpath("//a[@class='ico-account']")).isDisplayed();
+    }
+
+    public Boolean currencyListIsDisplayed(){
+        return driver.findElement(By.xpath("//select[@id='customerCurrency']")).isDisplayed();
+    }
+
+
 
 }

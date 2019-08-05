@@ -15,13 +15,13 @@
                      <exclude name="testCP1RegistrarUsuario"/>
                      <exclude name="testCP2CheckoutConEfectivo"/>
                      <exclude name="testCP3CheckoutConTarjeta"/>
-                     <include name="testCP4agregarAWishList"/>
+                     <exclude name="testCP4agregarAWishList"/>
                      <exclude name="testCP5CompararProductos"/>
                      <exclude name="testCP6ExtraRegistroConMailExistente"/>
                      <exclude name="testCP7ExtraEmailAFriend"/>
                      <exclude name="testCP8ExtraCambioDePassowrd"/>
                      <exclude name="testCP9ExtracambioMonedaParameters"/>
-                     <exclude name="testCP10ExtraAgregarACarritoyLuegoEliminarlo"/>
+                     <include name="testCP10ExtraAgregarACarritoyLuegoEliminarlo"/>
                    </methods>
                </class>
            </classes>

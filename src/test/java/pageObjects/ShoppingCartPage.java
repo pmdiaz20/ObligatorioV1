@@ -57,9 +57,13 @@ public class ShoppingCartPage extends BasePage {
 
     public void delete(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='remove-from-cart']//input[@type='checkbox']")));
-        System.out.println("encontró el checkbox");
+
         driver.findElement(By.xpath("//*[@class='remove-from-cart']//input[@type='checkbox']")).click();
         btnUpdateCart.click();
+    }
+
+    public Boolean btnUpdateCartIsDisplayed(){
+        return driver.findElement(By.xpath("//input[@name='updatecart']")).isDisplayed();
     }
 
 
@@ -69,6 +73,10 @@ public class ShoppingCartPage extends BasePage {
 
     public Boolean btnCheckoutIsDisplayed(){
         return driver.findElement(By.xpath("//button[@id='checkout']")).isDisplayed();
+    }
+
+    public Boolean checkBoxDeleteIsDisplayed(){
+        return driver.findElement(By.xpath("//*[@class='remove-from-cart']//input[@type='checkbox']")).isDisplayed();
     }
 
 }

@@ -65,7 +65,7 @@ public class DataProviderClass {
         return new Object[][]
                 {        //mail                ,oldpasword, newpassword, confirmNewPassword
 
-                        {"mailtest0002@mail.com", "pass00","pass01","pass01"}
+                        {"mailtest0002@mail.com", "pass02","pass03","pass03"}
                 };
     }
 

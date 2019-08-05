@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import utils.DataProviderClass;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 
 public class TestNopcommerce extends BaseTest{
@@ -196,18 +197,35 @@ public class TestNopcommerce extends BaseTest{
         loginPage.login(valid_user,valid_password);
         extentTest.log(Status.INFO, "Logueado Ok para correr testCP5CompararProductos");
         resultsPage = homePage.searchProduct(productToSearch);
-
-        extentTest.log(Status.INFO, "Agrego " + productToSearch + " a compareList");
+        extentTest.log(Status.INFO, "Realizo una búsqueda que devuelva más de un resultado");
+        extentTest.log(Status.INFO, "Palabra que devuelve mas de un resultado: "+productToSearch);
+        SA.assertTrue(resultsPage.busquedaDevuelveMasdeUnProducto());
+        extentTest.log(Status.INFO,"Valido que busqueda retorna mas de un producto");
+        extentTest.log(Status.INFO, "Cantidad de productos encontrados: "+resultsPage.cantidadDeProductos());
+        extentTest.log(Status.INFO, "Productos encontrados: "+resultsPage.nombreDeProductosEncontrados());
+        SA.assertTrue(resultsPage.btnAddToCompareIsDisplayed());
+        ArrayList<String> productos = new ArrayList<>();
+        productos= resultsPage.nombreDeProductosEncontrados();
+        extentTest.log(Status.INFO,"Valido que boton Add to compare se encuentre");
 
         resultsPage.addToCompareList(productToSearch);
+        extentTest.log(Status.INFO, "Agrego los productos a compareList");
 
-        resultsPage.clickInCompareList();
+        SA.assertTrue(resultsPage.compareListLinkExist());
+        extentTest.log(Status.INFO,"Valido que el link a CompareList este");
+        compareProductsPage=resultsPage.clickInCompareList();
+        SA.assertTrue(compareProductsPage.estoyEnComparePage());
+        extentTest.log(Status.INFO,"Voy a ComparePage y valido que estoy en esa pagina");
+        SA.assertFalse(compareProductsPage.compareListIsEmpty());//assertfalse
+        extentTest.log(Status.INFO,"Valido que NO aparece texto 'You have no items to compare.'");            driver.navigate().refresh();
 
-        driver.navigate().refresh();
-
+        SA.assertTrue(compareProductsPage.VerificarSiEstanProductosEnCompareList(productos));
+        extentTest.log(Status.INFO,"Valido que esten los productos en compareList");
 
         homePage.clickInlogout();
-        // FALTA TERMINAR
+        extentTest.log(Status.INFO, "Me deslogueo y finalizo testCP5CompararProductos");
+
+
     }
 
 
@@ -255,9 +273,10 @@ public class TestNopcommerce extends BaseTest{
     @Test(dataProvider = "UserOkWithProductToSendFriend", dataProviderClass = DataProviderClass.class)
     public void testCP7ExtraEmailAFriend(String mail,String password,String productToSearchAndSend,String emailFriend, Method method) {
         extentTest = extentReports.createTest(method.getName());
-
         loginPage = homePage.clickInLogIn();
-        loginPage.login(mail,password);
+        homePage= loginPage.login(mail,password);
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que estoy logueado porque aparece btnMyAccount");
         extentTest.log(Status.INFO, "Logueado Ok para correr testCP7ExtraEmailAFriend");
 
         resultsPage = homePage.searchProduct(productToSearchAndSend);
@@ -268,13 +287,27 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Llego a infoProductPage para ver detalle de " + productToSearchAndSend);
 
         productEmailAFriendPage = infoProductPage.sendProduct();
-        extentTest.log(Status.INFO, "Llego a la pagina de envio de mail");
+
+        SA.assertTrue(productEmailAFriendPage.estoyEnEmailAFriend());
+        extentTest.log(Status.INFO, "Valido que llego a pagina de envio de mail");
+
+        SA.assertTrue(productEmailAFriendPage.inputFriendEmailIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre campo 'Friend's email'");
+
+        SA.assertTrue(productEmailAFriendPage.inputMyEmailIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre campo 'Your email address'");
+
+        SA.assertTrue(productEmailAFriendPage.boxMensajePersonalIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre cuadro de text 'Personal message'");
+
+        SA.assertTrue(productEmailAFriendPage.btnSendEmailIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre boton sendEmail");
 
 
         productEmailAFriendPage.sendEmail(productToSearchAndSend,emailFriend);
         extentTest.log(Status.INFO, "Completo mail de amigo y le envio el producto");
         SA.assertTrue(productEmailAFriendPage.msgSendOK());
-
+        extentTest.log(Status.INFO, "Valido que aparezca mensaje 'Your message has been sent'");
         homePage.clickInlogout();
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP8ExtraEmailAFriend");
@@ -292,11 +325,25 @@ public class TestNopcommerce extends BaseTest{
         loginPage = homePage.clickInLogIn();
         loginPage.login(mail,password);
         extentTest.log(Status.INFO, "Logueado ok");
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed());extentTest.log(Status.INFO, "Valido login ok");
         customerPage= homePage.clickInMyAccount();
         extentTest.log(Status.INFO, "Clickeo en MyAccount");
+        SA.assertTrue(customerPage.changePasswordIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre el link para cambio de password");
         changePasswordPage= customerPage.goToChangePassword();
-        extentTest.log(Status.INFO, "Llego a sección My account - Customer info");
+        SA.assertTrue(changePasswordPage.estoyEnChangePasswordPage());
+        extentTest.log(Status.INFO, "Valido que llego a sección My account - Change password");
         extentTest.log(Status.INFO, "Clickeo en ChangePassword y paso a completar datos");
+
+        SA.assertTrue(changePasswordPage.inputOldPasswordIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre campo 'OldPassword'");
+        SA.assertTrue(changePasswordPage.inputNewPasswordIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre campo 'NewPassword'");
+        SA.assertTrue(changePasswordPage.inputConfirmNewPasswordIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre campo 'ConfirmNewPassword'");
+        SA.assertTrue(changePasswordPage.btnChangePasswordIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre boton 'ChangePassword'");
+
         extentTest.log(Status.INFO, "OldPassWord: " + password +"  newPassWord: "+passwordNuevo+"  confirmNewPassWord: " + confirmarPasswordNuevo);
         changePasswordPage.changePasswordOk(password,passwordNuevo,confirmarPasswordNuevo);
 
@@ -319,10 +366,9 @@ public class TestNopcommerce extends BaseTest{
         extentTest = extentReports.createTest(method.getName());
         extentTest.log(Status.INFO, "Busco producto y luego cambio a tipo de moneda "+moneda);
 
-
-
         resultsPage = homePage.searchProduct("Nokia Lumia 1020");
-
+        SA.assertTrue(homePage.currencyListIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre la lista de monedas");
         homePage.seleccionarMoneda(moneda);
         System.out.println(homePage.checkChangeCurrency(moneda));
         Assert.assertTrue(homePage.checkChangeCurrency(moneda));
@@ -351,19 +397,30 @@ public class TestNopcommerce extends BaseTest{
         //loginPage.login(valid_user,valid_password);
         resultsPage= homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
+
+        SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
+        extentTest.log(Status.INFO,"Valido que encuentra el producto "+ productToSearch);
+
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que se muestre boton AddToCart");
+
         resultsPage.addProductToShoppingCart();
         driver.navigate().refresh();
         extentTest.log(Status.INFO, "Agregando articulo " + productToSearch + "al carrito");
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito" );
         SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
+        extentTest.log(Status.INFO, "Valido que el producto este en el carrito");
 
+        SA.assertTrue(shoppingCartPage.checkBoxDeleteIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que el checkBox para remover se muestre");
+
+        SA.assertTrue(shoppingCartPage.btnUpdateCartIsDisplayed());
+        extentTest.log(Status.INFO, "Valido que boton UpdateCart se muestre");
         shoppingCartPage.delete();
         extentTest.log(Status.INFO, "Elimino producto");
-
         SA.assertTrue(shoppingCartPage.emptyCart());
-        extentTest.log(Status.INFO, "Chequeo que carrito no tenga productos");
+        extentTest.log(Status.INFO, "Valido que carrito no tenga productos");
 
 
     }

@@ -41,10 +41,34 @@ public class ChangePasswordPage extends BasePage {
         btnChangePassword.click();
     }
 
+    public Boolean inputOldPasswordIsDisplayed()
+    {
+        return driver.findElement(By.xpath("//input[@id='OldPassword']")).isDisplayed();
+    }
+
+    public Boolean inputNewPasswordIsDisplayed() {
+
+        return driver.findElement(By.xpath("//input[@id='NewPassword']")).isDisplayed();
+    }
+
+    public Boolean inputConfirmNewPasswordIsDisplayed() {
+
+        return driver.findElement(By.xpath("//input[@id='ConfirmNewPassword']")).isDisplayed();
+
+    }
+
+    public Boolean btnChangePasswordIsDisplayed(){
+        return driver.findElement(By.xpath("//input[@class='button-1 change-password-button']")).isDisplayed();
+    }
+
 
     public Boolean txtPasswordChangedOkIsDisplayed(){
 
         return driver.findElement(By.xpath("//*[contains(text(),'Password was changed')]")).isDisplayed();
+    }
+
+    public Boolean estoyEnChangePasswordPage(){
+        return driver.findElement(By.xpath("//h1[contains(text(),'My account - Change password')]")).isDisplayed();
     }
 
     public Boolean newPassIgualOldPass()

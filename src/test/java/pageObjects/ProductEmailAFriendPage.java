@@ -40,4 +40,25 @@ public class ProductEmailAFriendPage extends BasePage {
     {
         return driver.findElement(By.xpath("//*[contains(text(),'Your message has been sent')]")).isDisplayed();
     }
+
+    public Boolean estoyEnEmailAFriend(){
+        return driver.findElement(By.xpath("//h1[contains(text(),'Email a friend')]")).isDisplayed();
+    }
+
+    public Boolean inputFriendEmailIsDisplayed()
+    {
+        return driver.findElement(By.xpath("//input[@id='FriendEmail']")).isDisplayed();
+    }
+
+    public Boolean inputMyEmailIsDisplayed(){
+        return driver.findElement(By.xpath("//input[@id='YourEmailAddress']")).isDisplayed();
+    }
+
+    public Boolean boxMensajePersonalIsDisplayed(){
+        return driver.findElement(By.xpath("//textarea[@id='PersonalMessage']")).isDisplayed();
+    }
+
+    public Boolean btnSendEmailIsDisplayed(){
+        return driver.findElement(By.xpath("//input[@name='send-email']")).isDisplayed();
+    }
 }

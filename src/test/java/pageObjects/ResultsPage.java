@@ -22,6 +22,8 @@ public class ResultsPage extends BasePage {
     List<ProductItem> resultados;
     boolean encontrado;
 
+    ArrayList<String> nombreProducto;
+
     @FindBy(how = How.XPATH, using ="//a[contains(text(),'Compare products list')]")
     WebElement compareListLinkText;
 
@@ -63,21 +65,56 @@ public class ResultsPage extends BasePage {
         return driver.findElement(By.xpath("//input[@class='button-2 add-to-wishlist-button']")).isDisplayed();
     }
 
-    public void addToCompareList(String producto){
-        int contador=1;
-        for (ProductItem product : resultados){
+    public Boolean btnAddToCompareIsDisplayed(){
+        return driver.findElement(By.cssSelector("input[value='Add to compare list']")).isDisplayed();
+    }
 
-            System.out.println("tamanio de resultados: "+resultados.size());
-            System.out.println(product.getName());
+    public void addToCompareList(String producto){
+        for (ProductItem product : resultados){
+          //  System.out.println("tamanio de resultados: "+resultados.size());
+          //  System.out.println(product.getName());
             product.addToCompare();
-            System.out.println("Se agrega "+product.getName());
+          //  System.out.println("Se agrega "+product.getName());
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='content']")));
             driver.findElement(By.xpath("//span[@class='close']")).click();
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//p[@class='content']")));
-
-
         }
     }
+
+    public Integer cantidadDeProductos(){
+        return resultados.size();
+    }
+
+    public Boolean busquedaDevuelveMasdeUnProducto(){
+        boolean resultado= false;
+        if(resultados.size()>1)
+        {
+         resultado=true;
+        }
+        return resultado;
+    }
+
+    public Boolean compareListLinkExist()
+    {
+        return driver.findElement(By.xpath("//a[contains(text(),'Compare products list')]")).isDisplayed();
+    }
+
+
+    public ArrayList<String> nombreDeProductosEncontrados(){
+        nombreProducto= new ArrayList<String>();
+        int tamanio = resultados.size();
+        String nombre="";
+        for(int i=0; i< resultados.size();i++)
+        {
+            nombre= resultados.get(i).getName();
+            nombreProducto.add(nombre);
+        }
+
+        return  nombreProducto;
+
+    }
+
+
     public void addToWishList(String object){
         for (ProductItem product : resultados){
             if (product.getName().equals(object)){
