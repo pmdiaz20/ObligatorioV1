@@ -9,7 +9,7 @@ public class DataProviderClass {
     public static Object[][] getDataFromDataProvider(){
         return new Object[][]
                 {
-                        {"M","Juan","Perez","11","September","1980","mailtest0002@mail.com","Empresa SA","YES","pass00","pass00"}
+                        {"M","Juan","Perez","11","September","1980","amaial_2@mail.com","Empresa SA","YES","pass00","pass00"}
                 };
     }
 
@@ -65,7 +65,7 @@ public class DataProviderClass {
         return new Object[][]
                 {        //mail                ,oldpasword, newpassword, confirmNewPassword
 
-                        {"mailtest0002@mail.com", "pass02","pass03","pass03"}
+                        {"mailtest0002@mail.com", "pass03","pass04","pass04"}
                 };
     }
 

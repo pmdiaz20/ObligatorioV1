@@ -52,6 +52,8 @@ public class ResultsPage extends BasePage {
     public void addProductToShoppingCart(){
 
         btnAddToCart.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[@class='content']")));
+        driver.findElement(By.xpath("//span[@class='close']")).click();
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//span[@class='cart-label']"))));
     }
 

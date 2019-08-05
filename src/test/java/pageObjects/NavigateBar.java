@@ -108,7 +108,7 @@ public class NavigateBar  {
     }
 
     public HomePage logout() {
-       wait.until(ExpectedConditions.elementToBeClickable(btnLogout));
+        wait.until(ExpectedConditions.elementToBeClickable(btnLogout));
         btnLogout.click();
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ico-register']")));
         return new HomePage(driver);

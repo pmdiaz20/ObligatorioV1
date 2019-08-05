@@ -68,6 +68,7 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
         SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
         extentTest.log(Status.INFO, "Valido que encuentra producto");
+
         System.out.println("resultsPage.productoLocalizado(productToSearch): " + resultsPage.productoLocalizado(productToSearch));
 
         SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());

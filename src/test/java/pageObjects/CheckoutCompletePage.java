@@ -36,7 +36,7 @@ public class CheckoutCompletePage extends BasePage {
     public String txtOrderNumber(){
 
         String orden = driver.findElement(By.xpath("//*[@class='order-number']")).getText();
-        System.out.println(orden);
+
         return orden;
     }
 
