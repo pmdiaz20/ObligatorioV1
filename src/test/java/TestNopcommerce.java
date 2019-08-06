@@ -18,8 +18,11 @@ public class TestNopcommerce extends BaseTest{
 
         extentTest = extentReports.createTest(method.getName());
 
+        SA.assertTrue(homePage.btnRegisterIsDisplayed(),"Falla porque no muestra btnRegister");
+        extentTest.log(Status.INFO, "Valido que se muestra boton Register");
         registerPage = homePage.clickInRegister();
         extentTest.log(Status.INFO, "Clickeo en Register");
+
 
 
         SA.assertTrue(registerPage.firstNameIsDisplayed());
@@ -62,18 +65,20 @@ public class TestNopcommerce extends BaseTest{
 
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
-        extentTest.log(Status.INFO, "Logueado ok");
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed(),"Falla en mostrar btnMyAccount");
+        extentTest.log(Status.INFO, "Valido que estoy logueado");
 
         resultsPage= homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
-        SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
+        SA.assertTrue(resultsPage.productoLocalizado(productToSearch),"Falla en validacion de encontrar producto");
         extentTest.log(Status.INFO, "Valido que encuentra producto");
 
-        System.out.println("resultsPage.productoLocalizado(productToSearch): " + resultsPage.productoLocalizado(productToSearch));
+   //     System.out.println("resultsPage.productoLocalizado(productToSearch): " + resultsPage.productoLocalizado(productToSearch));
 
-        SA.assertTrue(resultsPage.btnAddToCartIsDisplayed());
+        SA.assertTrue(resultsPage.btnAddToCartIsDisplayed(),"Falla en validacion de AddToCart Displayed");
         extentTest.log(Status.INFO, "Valido que aparece boton AddToCart");
-        System.out.println("resultsPage.btnAddToCartIsDisplayed(): "+ resultsPage.btnAddToCartIsDisplayed());
+
+     //   System.out.println("resultsPage.btnAddToCartIsDisplayed(): "+ resultsPage.btnAddToCartIsDisplayed());
 
         resultsPage.addProductToShoppingCart();
         extentTest.log(Status.INFO, "Agrego articulo " + productToSearch + " al carrito");
@@ -81,27 +86,29 @@ public class TestNopcommerce extends BaseTest{
 
         shoppingCartPage = homePage.clickInShoppingCart();
         extentTest.log(Status.INFO, "Voy al carrito");
-        SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch));
-        System.out.println("shoppingCartPage.productIsInShoppingCart(productToSearch): "+shoppingCartPage.productIsInShoppingCart(productToSearch));
+        SA.assertTrue(shoppingCartPage.productIsInShoppingCart(productToSearch), "Falla en encontrar producto en carrito");
+
+     //   System.out.println("shoppingCartPage.productIsInShoppingCart(productToSearch): "+shoppingCartPage.productIsInShoppingCart(productToSearch));
+
         extentTest.log(Status.INFO, "Valido que el producto "+ productToSearch + " esté en el carrito");
 
-        SA.assertTrue(shoppingCartPage.btnCheckoutIsDisplayed());
+        SA.assertTrue(shoppingCartPage.btnCheckoutIsDisplayed(),"No se encuentra boton checkout");
         extentTest.log(Status.INFO, "Valido que aparezca el boton checkout");
         checkoutPage= shoppingCartPage.clickInCheckout();
         extentTest.log(Status.INFO, "Clickeo en Checkout");
 
         checkoutCompletePage= checkoutPage.realizarCheckoutConEfectivo(pais,ciudad,direccion1,direccion2,codigoPostal,telefono,fax);
         extentTest.log(Status.INFO, "Completé los datos para el checkout");
-        SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed());
-        System.out.println("checkoutCompletePage.txtOrderOkIsDisplayed(): "+ checkoutCompletePage.txtOrderOkIsDisplayed());
+        SA.assertTrue(checkoutCompletePage.txtOrderOkIsDisplayed(),"No se mostro texto de orden procesada ok");
+      //  System.out.println("checkoutCompletePage.txtOrderOkIsDisplayed(): "+ checkoutCompletePage.txtOrderOkIsDisplayed());
         extentTest.log(Status.INFO, "Valido que se muestra texto: Your order has been successfully processed!'");
 
         extentTest.log(Status.INFO, checkoutCompletePage.txtOrderNumber());
         checkoutCompletePage.txtOrderNumber();
 
-        SA.assertTrue(checkoutCompletePage.btnFinalizerOrderIsDisplayed());
+        SA.assertTrue(checkoutCompletePage.btnFinalizerOrderIsDisplayed(),"Falla en encontrar boton finalizar orden");
         extentTest.log(Status.INFO, "Valido que se muestra boton de finalizar orden");
-        System.out.println("checkoutCompletePage.btnFinalizerOrderIsDisplayed(): "+ checkoutCompletePage.btnFinalizerOrderIsDisplayed());
+       // System.out.println("checkoutCompletePage.btnFinalizerOrderIsDisplayed(): "+ checkoutCompletePage.btnFinalizerOrderIsDisplayed());
         checkoutCompletePage.finalizeOrder();
         extentTest.log(Status.INFO, "Finalizo orden");
         homePage.clickInlogout();
@@ -121,6 +128,9 @@ public class TestNopcommerce extends BaseTest{
 
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed(),"Falla en mostrar btnMyAccount");
+        extentTest.log(Status.INFO, "Valido que estoy logueado");
+
         resultsPage= homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Buscando articulo " + productToSearch);
         SA.assertTrue(resultsPage.productoLocalizado(productToSearch));
@@ -160,6 +170,10 @@ public class TestNopcommerce extends BaseTest{
         extentTest = extentReports.createTest(method.getName());
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
+
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed(),"Falla en mostrar btnMyAccount");
+
+        extentTest.log(Status.INFO, "Valido que estoy logueado");
         extentTest.log(Status.INFO, "Login Ok para correr testCP4agregarAWishList");
 
         resultsPage = homePage.searchProduct(productToSearch);
@@ -196,6 +210,9 @@ public class TestNopcommerce extends BaseTest{
 
         loginPage = homePage.clickInLogIn();
         loginPage.login(valid_user,valid_password);
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed(),"Falla en mostrar btnMyAccount");
+        extentTest.log(Status.INFO, "Valido que estoy logueado");
+
         extentTest.log(Status.INFO, "Logueado Ok para correr testCP5CompararProductos");
         resultsPage = homePage.searchProduct(productToSearch);
         extentTest.log(Status.INFO, "Realizo una búsqueda que devuelva más de un resultado");
@@ -327,6 +344,7 @@ public class TestNopcommerce extends BaseTest{
         loginPage.login(mail,password);
         extentTest.log(Status.INFO, "Logueado ok");
         SA.assertTrue(homePage.btnMyAccountIsDisplayed());extentTest.log(Status.INFO, "Valido login ok");
+
         customerPage= homePage.clickInMyAccount();
         extentTest.log(Status.INFO, "Clickeo en MyAccount");
         SA.assertTrue(customerPage.changePasswordIsDisplayed());
@@ -352,9 +370,17 @@ public class TestNopcommerce extends BaseTest{
         SA.assertTrue(changePasswordPage.txtPasswordChangedOkIsDisplayed());
         extentTest.log(Status.INFO, "Se cambio la contraseña correctamente");
         extentTest.log(Status.INFO, "La nueva password del mail "+mail+" es "+passwordNuevo);
-
-
         homePage.clickInlogout();
+        extentTest.log(Status.INFO, "Logout");
+        extentTest.log(Status.INFO, "Intento loguearme con mail '"+mail+"' y nueva password '"+passwordNuevo+"'");
+
+        loginPage = homePage.clickInLogIn();
+        loginPage.login(mail,passwordNuevo);
+        extentTest.log(Status.INFO, "Valido Login ok con nueva password: "+passwordNuevo);
+
+        SA.assertTrue(homePage.btnMyAccountIsDisplayed());
+        extentTest.log(Status.INFO, "Logueado ok");
+
 
         extentTest.log(Status.INFO, "Me deslogueo y finalizo correctamente testCP7ExtraCambioDeMail");
 
@@ -368,10 +394,9 @@ public class TestNopcommerce extends BaseTest{
         extentTest.log(Status.INFO, "Busco producto y luego cambio a tipo de moneda "+moneda);
 
         resultsPage = homePage.searchProduct("Nokia Lumia 1020");
-        SA.assertTrue(homePage.currencyListIsDisplayed());
+        SA.assertTrue(homePage.currencyListIsDisplayed(),"Falla en mostrar lista de monedas");
         extentTest.log(Status.INFO, "Valido que se muestre la lista de monedas");
         homePage.seleccionarMoneda(moneda);
-        System.out.println(homePage.checkChangeCurrency(moneda));
         Assert.assertTrue(homePage.checkChangeCurrency(moneda));
     }
 

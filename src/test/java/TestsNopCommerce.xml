@@ -8,46 +8,25 @@
     <parameter name="browser" value="chrome"/>
     <parameter name="currency" value="Euro"/>  <!-- Aca puede ir Euro o US Dollar -->
 
-     <test name="testPages">
-         <classes>
-             <class name = "TestNopcommerce">
-                 <methods>
-                     <include name="testCP1RegistrarUsuario"/>
-                     <include name="testCP2CheckoutConEfectivo"/>
-                     <include name="testCP3CheckoutConTarjeta"/>
-                     <include name="testCP4agregarAWishList"/>
-                     <include name="testCP5CompararProductos"/>
-                     <include name="testCP6ExtraRegistroConMailExistente"/>
-                     <include name="testCP7ExtraEmailAFriend"/>
-                     <include name="testCP8ExtraCambioDePassowrd"/>
-                     <include name="testCP9ExtracambioMonedaParameters"/>
-                     <include name="testCP10ExtraAgregarACarritoyLuegoEliminarlo"/>
-                   </methods>
-               </class>
-           </classes>
+         <test name="testPages">
+             <classes>
+                 <class name = "TestNopcommerce">
+                     <methods>
+                         <include name="testCP1RegistrarUsuario"/>
+                         <include name="testCP2CheckoutConEfectivo"/>
+                         <include name="testCP3CheckoutConTarjeta"/>
+                         <include name="testCP4agregarAWishList"/>
+                         <include name="testCP5CompararProductos"/>
+                         <include name="testCP6ExtraRegistroConMailExistente"/>
+                         <include name="testCP7ExtraEmailAFriend"/>
+                         <include name="testCP8ExtraCambioDePassowrd"/>
+                         <include name="testCP9ExtracambioMonedaParameters"/>
+                         <include name="testCP10ExtraAgregarACarritoyLuegoEliminarlo"/>
+                       </methods>
+                   </class>
+               </classes>
 
-
-      </test>
-    <!--
-        <test name="testPagesWithLogin">
-            <classes>
-                <class name = "TestNopcommerceWithLogin">
-                    <methods>
-                        <exclude name="testCP1RegistrarUsuario"/>
-                        <exclude name="testCP2CheckoutConEfectivo"/>
-                        <exclude name="testCP4agregarAWishList"/>
-                        <exclude name="testCP3CheckoutConTarjeta"/>
-                        <exclude name="testCP5CompararProductos"/>
-                        <exclude name="testCP6ExtraRegistroConMailExistente"/>
-                        <exclude name="testCP7ExtraCambioDeMail"/>
-                        <exclude name="testCP8ExtraEmailAFriend"/>
-                        <include name="testCP9ExtracambioMonedaParameters3"/>
-                    </methods>
-                </class>
-            </classes>
-
-
-        </test> -->
+          </test>
 
 
       </suite>

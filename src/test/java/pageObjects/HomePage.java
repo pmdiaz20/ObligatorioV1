@@ -57,6 +57,10 @@ public class HomePage extends BasePage {
         return driver.findElement(By.xpath("//select[@id='customerCurrency']")).isDisplayed();
     }
 
+    public Boolean btnRegisterIsDisplayed(){
+        return driver.findElement(By.xpath("//*[@class= 'header-links']//*[text()='Register']")).isDisplayed();
+    }
+
 
 
 }
