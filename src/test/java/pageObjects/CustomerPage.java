@@ -23,6 +23,6 @@ public class CustomerPage extends BasePage {
     }
 
     public Boolean changePasswordIsDisplayed(){
-        return driver.findElement(By.xpath("//a[contains(text(),'Change password')]")).isDisplayed();
+        return btnChangePassword.isDisplayed();
     }
 }
