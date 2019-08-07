@@ -46,7 +46,7 @@ public class ShoppingCartPage extends BasePage {
 
 
     public boolean productIsInShoppingCart(String nombreProducto){
-        return driver.findElement(By.xpath("//a[@class='product-name']")).getText().contains(nombreProducto);
+        return driver.findElement(By.className("product-name")).getText().contains(nombreProducto);
     }
 
 
