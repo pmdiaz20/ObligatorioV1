@@ -44,13 +44,13 @@ public class RegisterPage extends BasePage  {
     @FindBy(how = How.ID, using = "register-button")
     WebElement btnRegister;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthDay']")
+    @FindBy(how = How.NAME, using = "DateOfBirthDay")
     WebElement diaDeCumple;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthMonth']")
+    @FindBy(how = How.NAME, using = "DateOfBirthMonth")
     WebElement mesDeCumple;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthYear']")
+    @FindBy(how = How.NAME, using = "DateOfBirthYear")
     WebElement anioDeCumple;
 
     @FindBy(how = How.XPATH, using ="//li[contains(text(),'The specified email already exists')]")
