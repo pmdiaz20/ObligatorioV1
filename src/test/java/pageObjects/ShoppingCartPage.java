@@ -17,7 +17,7 @@ public class ShoppingCartPage extends BasePage {
     @FindBy(how = How.ID, using = "termsofservice")
     WebElement checkAgree;
 
-    @FindBy(how = How.NAME, using = "'updatecart")
+    @FindBy(how = How.NAME, using = "updatecart")
     WebElement btnUpdateCart;
 
     List<ProductItem> productos;
