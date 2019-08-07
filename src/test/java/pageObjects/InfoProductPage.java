@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class InfoProductPage extends BasePage {
 
 
-    @FindBy(how = How.XPATH, using ="//*[@class='email-a-friend'] ")
+    @FindBy(how = How.CLASS_NAME, using ="email-a-friend")
     WebElement btnSendEmailToFriend;
 
 
