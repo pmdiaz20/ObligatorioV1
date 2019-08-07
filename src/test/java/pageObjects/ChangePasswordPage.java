@@ -12,14 +12,14 @@ public class ChangePasswordPage extends BasePage {
     @FindBy(how = How.XPATH, using ="//h1[contains(text(),'My account - Change password')]")
     WebElement headerChangePassword;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='OldPassword']")
+    @FindBy(how = How.ID, using ="OldPassword")
     WebElement inputOldPassword;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='NewPassword']")
+    @FindBy(how = How.ID, using ="NewPassword")
 
     WebElement inputNewPassword;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='ConfirmNewPassword']")
+    @FindBy(how = How.ID, using ="ConfirmNewPassword")
     WebElement inputConfirmNewPassword;
 
     @FindBy(how = How.XPATH, using ="//input[@class='button-1 change-password-button']")
@@ -43,17 +43,17 @@ public class ChangePasswordPage extends BasePage {
 
     public Boolean inputOldPasswordIsDisplayed()
     {
-        return driver.findElement(By.xpath("//input[@id='OldPassword']")).isDisplayed();
+        return driver.findElement(By.id("OldPassword")).isDisplayed();
     }
 
     public Boolean inputNewPasswordIsDisplayed() {
 
-        return driver.findElement(By.xpath("//input[@id='NewPassword']")).isDisplayed();
+        return driver.findElement(By.id("NewPassword")).isDisplayed();
     }
 
     public Boolean inputConfirmNewPasswordIsDisplayed() {
 
-        return driver.findElement(By.xpath("//input[@id='ConfirmNewPassword']")).isDisplayed();
+        return driver.findElement(By.id("ConfirmNewPassword")).isDisplayed();
 
     }
 
@@ -78,7 +78,7 @@ public class ChangePasswordPage extends BasePage {
 
     public Boolean newPassDistinctConfirmPass(){
 
-        return driver.findElement(By.xpath("//span[@id='ConfirmNewPassword-error']")).isDisplayed();
+        return driver.findElement(By.id("ConfirmNewPassword-error")).isDisplayed();
 
     }
 
