@@ -15,13 +15,13 @@ public class NavigateBar  {
     WebDriver driver;
     WebDriverWait wait;
 
-    @FindBy(how = How.XPATH, using = "//*[@class= 'header-links']//*[text()='Register']")
+    @FindBy(how = How.PARTIAL_LINK_TEXT, using = "Register")
     WebElement headerBtnRegister;
 
-    @FindBy(how = How.XPATH, using = "//a[@class='ico-login']")
+    @FindBy(how = How.CLASS_NAME, using = "ico-login")
     WebElement headerBtnLogIn;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='small-searchterms']")
+    @FindBy(how = How.ID, using ="small-searchterms")
     WebElement searchBox;
 
     @FindBy(how = How.XPATH, using ="//input[@class='button-1 search-box-button']")
@@ -33,10 +33,10 @@ public class NavigateBar  {
     @FindBy(how = How.XPATH, using ="//span[@class='wishlist-label']")
     WebElement headerbtnWhisList;
 
-    @FindBy(how = How.XPATH, using ="//a[@class='ico-account']")
+    @FindBy(how = How.CLASS_NAME, using ="ico-account")
     WebElement headerBtnMyAccount;
 
-    @FindBy(how = How.XPATH, using ="//a[@class='ico-logout']")
+    @FindBy(how = How.CLASS_NAME, using ="ico-logout")
     WebElement btnLogout;
 
     CurrencyPage currencyMenu;
@@ -110,7 +110,7 @@ public class NavigateBar  {
     public HomePage logout() {
         wait.until(ExpectedConditions.elementToBeClickable(btnLogout));
         btnLogout.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@class='ico-register']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("ico-register")));
         return new HomePage(driver);
     }
 
