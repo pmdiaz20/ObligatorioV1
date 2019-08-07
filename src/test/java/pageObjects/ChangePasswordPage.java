@@ -32,8 +32,6 @@ public class ChangePasswordPage extends BasePage {
 
 
     public void changePasswordOk(String oldPassword, String newPassword,String confirmNewPassword){
-       // extentTest = extentReports.createTest(method.getName());
-
         inputOldPassword.sendKeys(oldPassword);
         inputNewPassword.sendKeys(newPassword);
         inputConfirmNewPassword.sendKeys(confirmNewPassword);
