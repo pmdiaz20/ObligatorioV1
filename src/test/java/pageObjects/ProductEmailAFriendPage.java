@@ -12,16 +12,16 @@ public class ProductEmailAFriendPage extends BasePage {
         super(driver);
     }
 
-    @FindBy(how = How.XPATH, using = "//input[@id='FriendEmail']")
+    @FindBy(how = How.ID, using = "FriendEmail")
     WebElement inputFriendEmail;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='YourEmailAddress']")
+    @FindBy(how = How.ID, using ="YourEmailAddress")
     WebElement inputMyEmail;
 
-    @FindBy(how = How.XPATH, using = "//textarea[@id='PersonalMessage']")
+    @FindBy(how = How.ID, using = "PersonalMessage")
     WebElement boxMensajePersonal;
 
-    @FindBy(how = How.XPATH, using = "//input[@name='send-email']")
+    @FindBy(how = How.NAME, using = "send-email")
     WebElement btnSendEmail;
 
     public void sendEmail(String productToSearchAndSend,String emailFriend){
