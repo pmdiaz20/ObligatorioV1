@@ -87,7 +87,7 @@ public class RegisterPage extends BasePage  {
             generoMasculino.click();
          //   Assert.assertTrue(maleRadioBtn.isSelected());
         }
-        else if (gender == "F")
+        else if (gender.equals("F"))
         {
             generoFemenino.click();
            // Assert.assertTrue(femaleRadioBtn.isSelected());
@@ -149,7 +149,7 @@ public class RegisterPage extends BasePage  {
         if (gender.equals("M")) {
             generoMasculino.click();
             //   Assert.assertTrue(maleRadioBtn.isSelected());
-        } else if (gender == "F") {
+        } else if (gender.equals("F")) {
             generoFemenino.click();
             // Assert.assertTrue(femaleRadioBtn.isSelected());
         }
