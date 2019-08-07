@@ -100,7 +100,7 @@ public class RegisterPage extends BasePage  {
 
         //*[text()='Your registration completed']
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='result']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("result")));
 
 
         return new RegisterResultPage(driver);
