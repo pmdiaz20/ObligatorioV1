@@ -88,12 +88,7 @@ public class ResultsPage extends BasePage {
     }
 
     public Boolean busquedaDevuelveMasdeUnProducto(){
-        boolean resultado= false;
-        if(resultados.size()>1)
-        {
-         resultado=true;
-        }
-        return resultado;
+        return resultados.size() > 1;
     }
 
     public Boolean compareListLinkExist()
