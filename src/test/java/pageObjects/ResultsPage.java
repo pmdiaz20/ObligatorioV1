@@ -28,7 +28,7 @@ public class ResultsPage extends BasePage {
     WebElement compareListLinkText;
 
 
-    @FindBy(how = How.XPATH, using ="//select[@id='products-orderby']")
+    @FindBy(how = How.ID, using ="products-orderby")
     WebElement selectSortBy;
 
     public CompareProductsPage clickInCompareList()
