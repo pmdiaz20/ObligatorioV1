@@ -19,7 +19,7 @@ public class RegisterResultPage extends BasePage {
 
     }
 
-    @FindBy(how = How.XPATH, using ="//input[@name='register-continue']")
+    @FindBy(how = How.NAME, using ="register-continue")
     WebElement btnContinuarInRegisterPageOK;
 
     public boolean txtOKRegisterIsDisplayed(){return txtRegisterCompleted.isDisplayed();}
