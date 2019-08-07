@@ -99,7 +99,6 @@ public class ResultsPage extends BasePage {
 
     public ArrayList<String> nombreDeProductosEncontrados(){
         nombreProducto= new ArrayList<String>();
-        int tamanio = resultados.size();
         String nombre="";
         for(int i=0; i< resultados.size();i++)
         {
