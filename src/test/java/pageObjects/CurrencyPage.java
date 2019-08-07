@@ -32,7 +32,7 @@ public class CurrencyPage {
         Select seleccionarMoneda = new Select(listaDeMonedas);
         seleccionarMoneda.selectByVisibleText(moneda);
 
-        System.out.println("seleccione moneda: "+moneda);
+        //System.out.println("seleccione moneda: "+moneda);
     }
 
 

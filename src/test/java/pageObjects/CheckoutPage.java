@@ -111,10 +111,10 @@ public class CheckoutPage extends BasePage {
         try {
             waitAlerta.until(ExpectedConditions.alertIsPresent());
             encuentraAlert = true;
-            System.out.println("isAlertPresent : " +encuentraAlert);
+            //System.out.println("isAlertPresent : " +encuentraAlert);
         } catch (TimeoutException eTO) {
             encuentraAlert = false;
-            System.out.println("isAlertPresent : " +encuentraAlert);
+          //  System.out.println("isAlertPresent : " +encuentraAlert);
         }
         return encuentraAlert;
     }
@@ -229,7 +229,7 @@ public class CheckoutPage extends BasePage {
             primeraCompra = true;
         }
         if (primeraCompra == false) {
-            System.out.println("No es primera compra ese mail");
+            //System.out.println("No es primera compra ese mail");
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
             btnContinueInBillingAddress.click();
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInShippingAddress));
@@ -269,7 +269,7 @@ public class CheckoutPage extends BasePage {
         }
         else
         {
-            System.out.println("Es primera compra con ese mail");
+            //System.out.println("Es primera compra con ese mail");
             //1 Billing address
             wait.until(ExpectedConditions.elementToBeClickable(btnContinueInBillingAddress));
 

@@ -118,7 +118,7 @@ public class BaseTest {
     @AfterSuite(alwaysRun = true)
     public void flush(){
         extentReports.flush();
-        //driver.quit();
+        driver.quit();
     }
 
 }
