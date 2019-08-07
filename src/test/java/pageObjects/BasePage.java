@@ -13,9 +13,6 @@ public class BasePage {
     protected WebDriverWait wait;
     protected NavigateBar bar;
 
-    protected static ExtentHtmlReporter extentHtmlReporter;
-    protected static ExtentReports extentReports;
-    protected static ExtentTest extentTest;
 
     protected static String productName;
 
