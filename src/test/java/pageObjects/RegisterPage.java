@@ -44,13 +44,13 @@ public class RegisterPage extends BasePage  {
     @FindBy(how = How.ID, using = "register-button")
     WebElement btnRegister;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthDay']")
+    @FindBy(how = How.NAME, using = "DateOfBirthDay")
     WebElement diaDeCumple;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthMonth']")
+    @FindBy(how = How.NAME, using = "DateOfBirthMonth")
     WebElement mesDeCumple;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='date-picker-wrapper']//*[@name='DateOfBirthYear']")
+    @FindBy(how = How.NAME, using = "DateOfBirthYear")
     WebElement anioDeCumple;
 
     @FindBy(how = How.XPATH, using ="//li[contains(text(),'The specified email already exists')]")
@@ -87,7 +87,7 @@ public class RegisterPage extends BasePage  {
             generoMasculino.click();
          //   Assert.assertTrue(maleRadioBtn.isSelected());
         }
-        else if (gender == "F")
+        else if (gender.equals("F"))
         {
             generoFemenino.click();
            // Assert.assertTrue(femaleRadioBtn.isSelected());
@@ -100,7 +100,7 @@ public class RegisterPage extends BasePage  {
 
         //*[text()='Your registration completed']
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@class='result']")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("result")));
 
 
         return new RegisterResultPage(driver);
@@ -149,7 +149,7 @@ public class RegisterPage extends BasePage  {
         if (gender.equals("M")) {
             generoMasculino.click();
             //   Assert.assertTrue(maleRadioBtn.isSelected());
-        } else if (gender == "F") {
+        } else if (gender.equals("F")) {
             generoFemenino.click();
             // Assert.assertTrue(femaleRadioBtn.isSelected());
         }

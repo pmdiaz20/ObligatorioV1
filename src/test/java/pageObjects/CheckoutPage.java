@@ -9,47 +9,46 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CheckoutPage extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//input[@id='ShipToSameAddress']")
+    @FindBy(how = How.ID, using = "ShipToSameAddress")
     WebElement checkShipToSameAddress;
 
-    @FindBy(how = How.XPATH, using = "//select[@id='billing-address-select']")
+    @FindBy(how = How.ID, using = "billing-address-select")
     WebElement selectAddress;
 
-    @FindBy(how = How.XPATH, using = "//select[@id='BillingNewAddress_StateProvinceId']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_StateProvinceId")
     WebElement selectStateInBillingAddress;
 
-
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_FirstName']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_FirstName")
     WebElement inputFirstNameInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_LastName']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_LastName")
     WebElement inputLastNameInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_Email']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_Email")
     WebElement inputAddress_EmailInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_Company']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_Company")
     WebElement inputCompanyInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//select[@id='BillingNewAddress_CountryId']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_CountryId")
     WebElement selectCountryInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_City']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_City")
     WebElement inputCityInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_Address1']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_Address1")
     WebElement inputAddress1InBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_Address2']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_Address2")
     WebElement inputAddress2InBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_ZipPostalCode']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_ZipPostalCode")
     WebElement inputPostalCodeInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_PhoneNumber']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_PhoneNumber")
     WebElement inputPhoneNumberInBillingAddress;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='BillingNewAddress_FaxNumber']")
+    @FindBy(how = How.ID, using = "BillingNewAddress_FaxNumber")
     WebElement inputFaxInBillingAddress;
 
     @FindBy(how = How.XPATH, using = "//div[@id='billing-buttons-container']//input[@class='button-1 new-address-next-step-button']")
@@ -61,10 +60,10 @@ public class CheckoutPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@class='button-1 shipping-method-next-step-button']")
     WebElement btnContinueInShippingMethod;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='paymentmethod_0']")
+    @FindBy(how = How.ID, using = "paymentmethod_0")
     WebElement paymentMethod_Money;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='paymentmethod_1']")
+    @FindBy(how = How.ID, using = "paymentmethod_1")
     WebElement paymentMethod_CreditCard;
 
 
@@ -75,22 +74,22 @@ public class CheckoutPage extends BasePage {
     @FindBy(how = How.XPATH, using = "//input[@class='button-1 payment-info-next-step-button']")
     WebElement btnContinueInPaymentInfo;
 
-    @FindBy(how = How.XPATH, using = "//*[@class='dropdownlists']")
+    @FindBy(how = How.CLASS_NAME, using = "dropdownlists")
     WebElement selectmarcaTarjetaInPaymentInformation;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='CardholderName']")
+    @FindBy(how = How.ID, using ="CardholderName")
     WebElement inputCardHolderName;
 
-    @FindBy(how = How.XPATH, using ="//input[@id='CardNumber']")
+    @FindBy(how = How.ID, using ="CardNumber")
     WebElement inputCardNumber;
 
-    @FindBy(how = How.XPATH, using ="//select[@id='ExpireMonth']")
+    @FindBy(how = How.ID, using ="ExpireMonth")
     WebElement expirationMonth;
 
-    @FindBy(how = How.XPATH, using ="//select[@id='ExpireYear']")
+    @FindBy(how = How.ID, using ="ExpireYear")
     WebElement expirationYear;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='CardCode']")
+    @FindBy(how = How.ID, using = "CardCode")
     WebElement inputCardCode;
 
 

@@ -14,7 +14,7 @@ public class CustomerPage extends BasePage {
     @FindBy(how = How.XPATH, using ="//a[@class='inactive'][contains(text(),'Orders')]")
     WebElement btnOrders;
 
-    @FindBy(how = How.XPATH, using ="//a[contains(text(),'Change password')]")
+    @FindBy(how = How.PARTIAL_LINK_TEXT, using ="Change password")
     WebElement btnChangePassword;
 
     public ChangePasswordPage goToChangePassword(){
@@ -23,6 +23,6 @@ public class CustomerPage extends BasePage {
     }
 
     public Boolean changePasswordIsDisplayed(){
-        return driver.findElement(By.xpath("//a[contains(text(),'Change password')]")).isDisplayed();
+        return btnChangePassword.isDisplayed();
     }
 }

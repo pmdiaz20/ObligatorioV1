@@ -9,10 +9,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class LoginPage extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//input[@id='Email']")
+    @FindBy(how = How.ID, using = "Email")
     WebElement inputEmail;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='Password']")
+    @FindBy(how = How.ID, using = "Password")
     WebElement inputPassword;
 
     @FindBy(how = How.XPATH, using = "//input[@class='button-1 login-button']")
@@ -29,7 +29,7 @@ public class LoginPage extends BasePage {
         inputEmail.sendKeys(valid_user);
         inputPassword.sendKeys(valid_password);
         btnLogIn.click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'Log out')]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.partialLinkText("Log out")));
 
         return new HomePage(driver);
     }

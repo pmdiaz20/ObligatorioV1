@@ -28,7 +28,7 @@ public class ResultsPage extends BasePage {
     WebElement compareListLinkText;
 
 
-    @FindBy(how = How.XPATH, using ="//select[@id='products-orderby']")
+    @FindBy(how = How.ID, using ="products-orderby")
     WebElement selectSortBy;
 
     public CompareProductsPage clickInCompareList()
@@ -88,12 +88,7 @@ public class ResultsPage extends BasePage {
     }
 
     public Boolean busquedaDevuelveMasdeUnProducto(){
-        boolean resultado= false;
-        if(resultados.size()>1)
-        {
-         resultado=true;
-        }
-        return resultado;
+        return resultados.size() > 1;
     }
 
     public Boolean compareListLinkExist()
@@ -104,7 +99,6 @@ public class ResultsPage extends BasePage {
 
     public ArrayList<String> nombreDeProductosEncontrados(){
         nombreProducto= new ArrayList<String>();
-        int tamanio = resultados.size();
         String nombre="";
         for(int i=0; i< resultados.size();i++)
         {

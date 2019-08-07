@@ -19,12 +19,12 @@ public class WishListProduct {
 
     public void addToCart()
     {
-        element.findElement(By.xpath("//input[@name='addtocartbutton']")).click();
+        element.findElement(By.name("addtocartbutton")).click();
     }
 
     public void updateWishList()
     {
-        element.findElement(By.xpath("//input[@name='updatecart']")).click();
+        element.findElement(By.name("updatecart")).click();
     }
 
 }

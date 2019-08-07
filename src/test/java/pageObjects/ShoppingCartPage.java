@@ -11,13 +11,13 @@ import java.util.List;
 
 public class ShoppingCartPage extends BasePage {
 
-    @FindBy(how = How.XPATH, using = "//button[@id='checkout']")
+    @FindBy(how = How.ID, using = "checkout")
     WebElement btnCheckout;
 
-    @FindBy(how = How.XPATH, using = "//input[@id='termsofservice']")
+    @FindBy(how = How.ID, using = "termsofservice")
     WebElement checkAgree;
 
-    @FindBy(how = How.XPATH, using = "//input[@name='updatecart']")
+    @FindBy(how = How.NAME, using = "updatecart")
     WebElement btnUpdateCart;
 
     List<ProductItem> productos;
@@ -46,7 +46,7 @@ public class ShoppingCartPage extends BasePage {
 
 
     public boolean productIsInShoppingCart(String nombreProducto){
-        return driver.findElement(By.xpath("//a[@class='product-name']")).getText().contains(nombreProducto);
+        return driver.findElement(By.className("product-name")).getText().contains(nombreProducto);
     }
 
 
@@ -63,7 +63,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public Boolean btnUpdateCartIsDisplayed(){
-        return driver.findElement(By.xpath("//input[@name='updatecart']")).isDisplayed();
+        return driver.findElement(By.name("updatecart")).isDisplayed();
     }
 
 
@@ -72,7 +72,7 @@ public class ShoppingCartPage extends BasePage {
     }
 
     public Boolean btnCheckoutIsDisplayed(){
-        return driver.findElement(By.xpath("//button[@id='checkout']")).isDisplayed();
+        return driver.findElement(By.id("checkout")).isDisplayed();
     }
 
     public Boolean checkBoxDeleteIsDisplayed(){

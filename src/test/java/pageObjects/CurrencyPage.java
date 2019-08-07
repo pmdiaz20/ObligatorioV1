@@ -14,7 +14,7 @@ public class CurrencyPage {
     WebDriver driver;
     WebDriverWait wait;
 
-    @FindBy(how = How.XPATH, using="//select[@id='customerCurrency']")
+    @FindBy(how = How.ID, using="customerCurrency")
      WebElement listaDeMonedas;
 
     public CurrencyPage(WebDriver driver){
